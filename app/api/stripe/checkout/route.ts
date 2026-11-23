@@ -5,20 +5,15 @@ import { env } from "@/lib/env";
 export async function POST(req: Request) {
   try {
     const body = await req.json().catch(() => ({}));
-    const { plan = "solo", businessId } = body;
+    const { businessId } = body;
 
-    // Détermination du Price ID Stripe selon le forfait
-    let priceId = env.stripe.priceIdSolo;
-    if (plan === "pro") {
-      priceId = env.stripe.priceIdPro;
-    } else if (plan === "annual") {
-      priceId = env.stripe.priceIdAnnual;
-    }
+    // Forfait unique REVEQ tout inclus à 79 $ CAD / mois
+    const priceId = env.stripe.priceId79;
 
     // Mode simulation / dev sans clés Stripe de production
     if (!env.stripe.secretKey || env.stripe.secretKey.includes("placeholder")) {
       return NextResponse.json({
-        url: `${env.appUrl}/dashboard?mock_checkout=true&plan=${plan}`,
+        url: `${env.appUrl}/dashboard?mock_checkout=true&plan=reveq-79`,
         simulated: true,
       });
     }

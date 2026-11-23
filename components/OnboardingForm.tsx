@@ -16,10 +16,10 @@ import {
   Link as LinkIcon,
   Sparkles,
   ShieldCheck,
-  HelpCircle,
+  Check,
 } from "lucide-react";
 
-export function OnboardingForm({ initialPlan = "solo" }: { initialPlan?: string }) {
+export function OnboardingForm() {
   const router = useRouter();
   const [step, setStep] = useState<1 | 2 | 3>(1);
 
@@ -30,11 +30,8 @@ export function OnboardingForm({ initialPlan = "solo" }: { initialPlan?: string 
   const [isSlugEditedManually, setIsSlugEditedManually] = useState(false);
   const [googleUrl, setGoogleUrl] = useState("");
   const [alertEmail, setAlertEmail] = useState("");
-  const [primaryColor, setPrimaryColor] = useState("#0E7470");
+  const [primaryColor, setPrimaryColor] = useState("#059669");
   const [language, setLanguage] = useState<"FR" | "EN" | "BOTH">("FR");
-  const [selectedPlan, setSelectedPlan] = useState<"solo" | "pro">(
-    initialPlan === "pro" ? "pro" : "solo"
-  );
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [completedSlug, setCompletedSlug] = useState<string | null>(null);
 
@@ -102,8 +99,7 @@ export function OnboardingForm({ initialPlan = "solo" }: { initialPlan?: string 
     setIsSubmitting(true);
 
     try {
-      // Simulation locale immédiate pour validation de parcours
-      // En production avec Stripe branché, cela redirige vers la session Stripe Checkout
+      // Simulation / enregistrement local
       await new Promise((resolve) => setTimeout(resolve, 800));
       setCompletedSlug(slug);
     } catch {
@@ -116,22 +112,22 @@ export function OnboardingForm({ initialPlan = "solo" }: { initialPlan?: string 
   if (completedSlug) {
     return (
       <div className="max-w-lg mx-auto bg-white p-8 rounded-3xl border border-border shadow-xl text-center space-y-6 animate-in fade-in zoom-in-95 duration-200">
-        <div className="w-16 h-16 mx-auto rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
+        <div className="w-16 h-16 mx-auto rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center">
           <CheckCircle2 className="w-9 h-9" />
         </div>
 
         <div className="space-y-2">
           <h2 className="text-2xl font-black text-foreground">
-            Félicitations ! Votre Kit est prêt.
+            Félicitations ! Votre REVEQ est prêt.
           </h2>
           <p className="text-sm text-slate-600">
-            Votre lien court dynamique et votre QR Code ont été générés pour{" "}
+            Votre QR Code dynamique et vos outils de réponse par IA sont configurés pour{" "}
             <strong>{businessName}</strong>.
           </p>
         </div>
 
         <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-left space-y-2">
-          <p className="text-xs text-slate-500 font-semibold uppercase">Lien dynamique de votre commerce</p>
+          <p className="text-xs text-slate-500 font-semibold uppercase">Lien dynamique de votre QR Code</p>
           <div className="flex items-center justify-between bg-white px-3 py-2 rounded-lg border font-mono text-xs text-brand font-bold">
             <span>app.reveq.ca/{completedSlug}</span>
             <Link
@@ -146,7 +142,7 @@ export function OnboardingForm({ initialPlan = "solo" }: { initialPlan?: string 
 
         <div className="space-y-3 pt-2">
           <Link href="/dashboard" className="block">
-            <Button size="lg" className="w-full font-bold">
+            <Button size="lg" className="w-full font-bold bg-brand hover:bg-brand-hover text-white">
               Accéder à mon Tableau de Bord
               <ArrowRight className="w-4 h-4 ml-1" />
             </Button>
@@ -318,65 +314,65 @@ export function OnboardingForm({ initialPlan = "solo" }: { initialPlan?: string 
             </div>
           )}
 
-          {/* STEP 3 : CHOIX FORFAIT & CONFIRMATION */}
+          {/* STEP 3 : FORFAIT UNIQUE 79 $ & CONFIRMATION */}
           {step === 3 && (
             <div className="space-y-5 animate-in fade-in duration-150">
               <div className="space-y-1">
                 <h2 className="text-xl font-bold text-foreground flex items-center gap-2">
                   <Sparkles className="w-5 h-5 text-brand" />
-                  Confirmation & Essai Gratuit de 7 jours
+                  Forfait REVEQ Tout Inclus (79 $ / mois)
                 </h2>
                 <p className="text-xs text-slate-500">
-                  Choisissez votre formule. Aucun frais avant la fin des 7 jours.
+                  Une formule unique et complète sans frais caché, avec 7 jours d&apos;essai gratuit.
                 </p>
               </div>
 
-              {/* Plan Choice Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div
-                  onClick={() => setSelectedPlan("solo")}
-                  className={`p-4 rounded-2xl border-2 transition-all cursor-pointer ${
-                    selectedPlan === "solo"
-                      ? "border-brand bg-brand-light/30 ring-1 ring-brand/30"
-                      : "border-border bg-white hover:border-slate-300"
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-bold text-sm text-foreground">Forfait Solo</span>
-                    <span className="text-xs font-black text-brand">29 $ / mois</span>
+              {/* Single Comprehensive Plan Card */}
+              <div className="p-5 rounded-2xl border-2 border-brand bg-emerald-50/30 space-y-3">
+                <div className="flex items-center justify-between pb-3 border-b border-emerald-100">
+                  <div>
+                    <h3 className="font-black text-lg text-foreground">Abonnement REVEQ Intégral</h3>
+                    <p className="text-xs text-slate-500">Tout compris avec réponses clients par IA illimitées</p>
                   </div>
-                  <p className="text-[11px] text-slate-600">
-                    1 emplacement Google Maps, kits PDF illimités, mode écran caisse.
-                  </p>
+                  <div className="text-right">
+                    <span className="text-2xl font-black text-foreground">79 $</span>
+                    <span className="text-xs text-slate-500 block">CAD / mois</span>
+                  </div>
                 </div>
 
-                <div
-                  onClick={() => setSelectedPlan("pro")}
-                  className={`p-4 rounded-2xl border-2 transition-all cursor-pointer ${
-                    selectedPlan === "pro"
-                      ? "border-brand bg-brand-light/30 ring-1 ring-brand/30"
-                      : "border-border bg-white hover:border-slate-300"
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-bold text-sm text-foreground">Forfait Pro</span>
-                    <span className="text-xs font-black text-brand">49 $ / mois</span>
-                  </div>
-                  <p className="text-[11px] text-slate-600">
-                    Jusqu&apos;à 3 adresses, marque blanche, modèles de réponses bilingues.
-                  </p>
-                </div>
+                <ul className="space-y-2 text-xs text-slate-700">
+                  <li className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-brand shrink-0" />
+                    <span><strong>Générateur de réponses clients par IA inclus</strong> (4 tonalités)</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-brand shrink-0" />
+                    <span>Filtre d&apos;avis Google 5★ & interception privée 1-3★</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-brand shrink-0" />
+                    <span>Générateur PDF d&apos;affiches comptoir et autocollants vectoriels HD</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-brand shrink-0" />
+                    <span>Mode Borne caisse tablette (/kiosk/[slug])</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-brand shrink-0" />
+                    <span>Alertes courriel instantanées & Bilan mensuel ROI</span>
+                  </li>
+                </ul>
               </div>
 
               {/* Summary guarantees */}
               <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 space-y-2">
                 <div className="flex items-center gap-2 text-foreground font-semibold">
                   <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span>Garantie Sérénité 7 Jours Sans Risque</span>
+                  <span>Essai Gratuit de 7 Jours Sans Risque</span>
                 </div>
                 <ul className="space-y-1 text-[11px] text-slate-600 pl-6 list-disc">
-                  <li>Aucun frais prélevé aujourd&apos;hui (0.00 $ CAD).</li>
-                  <li>Accès immédiat à votre lien dynamique et kits d&apos;impression PDF.</li>
+                  <li>Aucun prélèvement aujourd&apos;hui (0.00 $ CAD).</li>
+                  <li>Accès immédiat à votre lien QR Code, affiches et assistant IA.</li>
                   <li>Annulation en 1 clic sans condition depuis votre espace client.</li>
                 </ul>
               </div>
@@ -405,7 +401,7 @@ export function OnboardingForm({ initialPlan = "solo" }: { initialPlan?: string 
             )}
 
             {step < 3 ? (
-              <Button type="button" size="md" onClick={nextStep} className="font-bold">
+              <Button type="button" size="md" onClick={nextStep} className="font-bold bg-brand hover:bg-brand-hover text-white">
                 Étape suivante
                 <ArrowRight className="w-4 h-4 ml-1" />
               </Button>
@@ -414,9 +410,9 @@ export function OnboardingForm({ initialPlan = "solo" }: { initialPlan?: string 
                 type="submit"
                 size="md"
                 disabled={isSubmitting}
-                className="font-bold shadow-md bg-brand hover:bg-brand-hover"
+                className="font-bold shadow-md bg-brand hover:bg-brand-hover text-white"
               >
-                {isSubmitting ? "Création en cours..." : "Démarrer mes 7 jours gratuits"}
+                {isSubmitting ? "Activation en cours..." : "Démarrer mes 7 jours gratuits (79 $ / mois)"}
                 <ArrowRight className="w-4 h-4 ml-1" />
               </Button>
             )}

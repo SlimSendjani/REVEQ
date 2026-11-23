@@ -11,8 +11,13 @@ import {
   Filter,
   Check,
   RotateCcw,
+  Sparkles,
+  Copy,
+  Send,
+  MessageSquare,
 } from "lucide-react";
 import { Button } from "./ui/button";
+import { generateCustomerResponse, RESPONSE_TONES, type ResponseTone } from "@/lib/ai-responder";
 
 interface FeedbackManagerProps {
   initialFeedbacks: PrivateFeedback[];
@@ -22,6 +27,12 @@ export function FeedbackManager({ initialFeedbacks }: FeedbackManagerProps) {
   const [feedbacks, setFeedbacks] = useState<PrivateFeedback[]>(initialFeedbacks);
   const [filter, setFilter] = useState<"all" | "new" | "resolved">("all");
   const [loadingId, setLoadingId] = useState<string | null>(null);
+
+  // State pour le générateur de réponse IA
+  const [activeAiFeedbackId, setActiveAiFeedbackId] = useState<string | null>(null);
+  const [selectedTone, setSelectedTone] = useState<ResponseTone>("chaleureux");
+  const [editedReplies, setEditedReplies] = useState<{ [feedbackId: string]: string }>({});
+  const [copiedId, setCopiedId] = useState<string | null>(null);
 
   const filteredFeedbacks = feedbacks.filter((fb) => {
     if (filter === "new") return fb.status === "new";
@@ -48,6 +59,36 @@ export function FeedbackManager({ initialFeedbacks }: FeedbackManagerProps) {
     } finally {
       setLoadingId(null);
     }
+  };
+
+  const handleOpenAi = (feedback: PrivateFeedback) => {
+    setActiveAiFeedbackId(feedback.id);
+    const reply = generateCustomerResponse({
+      businessName: "Notre établissement",
+      customerName: feedback.customer_name,
+      rating: feedback.rating,
+      message: feedback.message,
+      tone: selectedTone,
+    });
+    setEditedReplies((prev) => ({ ...prev, [feedback.id]: reply }));
+  };
+
+  const handleChangeTone = (feedback: PrivateFeedback, tone: ResponseTone) => {
+    setSelectedTone(tone);
+    const reply = generateCustomerResponse({
+      businessName: "Notre établissement",
+      customerName: feedback.customer_name,
+      rating: feedback.rating,
+      message: feedback.message,
+      tone,
+    });
+    setEditedReplies((prev) => ({ ...prev, [feedback.id]: reply }));
+  };
+
+  const handleCopyReply = (id: string, text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedId(id);
+    setTimeout(() => setCopiedId(null), 2000);
   };
 
   const newCount = feedbacks.filter((f) => f.status === "new").length;
@@ -117,10 +158,12 @@ export function FeedbackManager({ initialFeedbacks }: FeedbackManagerProps) {
           </p>
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-5">
           {filteredFeedbacks.map((fb) => {
             const isEmail = fb.customer_contact?.includes("@");
             const isPhone = fb.customer_contact && !isEmail;
+            const isAiOpen = activeAiFeedbackId === fb.id;
+            const currentReplyText = editedReplies[fb.id] || "";
 
             return (
               <div
@@ -128,7 +171,7 @@ export function FeedbackManager({ initialFeedbacks }: FeedbackManagerProps) {
                 className={`p-6 rounded-3xl bg-white border shadow-xs transition-all ${
                   fb.status === "new"
                     ? "border-amber-200/90 ring-1 ring-amber-100"
-                    : "border-border opacity-85"
+                    : "border-border opacity-90"
                 }`}
               >
                 {/* Header */}
@@ -175,6 +218,104 @@ export function FeedbackManager({ initialFeedbacks }: FeedbackManagerProps) {
                   &ldquo;{fb.message}&rdquo;
                 </div>
 
+                {/* AI RESPONSE COMPOSER PANEL */}
+                {isAiOpen && (
+                  <div className="my-4 p-5 rounded-2xl bg-emerald-50/60 border border-emerald-200 space-y-4 animate-in fade-in duration-150">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-1.5 text-xs font-black text-emerald-900">
+                        <Sparkles className="w-4 h-4 text-brand" />
+                        <span>Réponse rédigée par l&apos;IA de REVEQ</span>
+                      </div>
+                      <span className="text-[10px] text-emerald-700 font-bold bg-white px-2 py-0.5 rounded-full border border-emerald-200">
+                        Inclus dans le forfait 79 $
+                      </span>
+                    </div>
+
+                    {/* Tone Selector Pills */}
+                    <div>
+                      <p className="text-[11px] font-bold text-slate-700 mb-1.5">
+                        Choisissez le type de réponse :
+                      </p>
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                        {RESPONSE_TONES.map((t) => (
+                          <button
+                            key={t.id}
+                            type="button"
+                            onClick={() => handleChangeTone(fb, t.id)}
+                            className={`p-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 border cursor-pointer ${
+                              selectedTone === t.id
+                                ? "bg-brand text-white border-brand shadow-2xs"
+                                : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"
+                            }`}
+                          >
+                            <span>{t.emoji}</span>
+                            <span className="text-[11px] truncate">{t.label}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Editable Textarea */}
+                    <div>
+                      <textarea
+                        rows={6}
+                        value={currentReplyText}
+                        onChange={(e) =>
+                          setEditedReplies((prev) => ({
+                            ...prev,
+                            [fb.id]: e.target.value,
+                          }))
+                        }
+                        className="w-full text-xs p-3.5 rounded-xl border border-emerald-200 bg-white text-slate-800 leading-relaxed font-sans resize-none focus:outline-none focus:ring-2 focus:ring-brand"
+                      />
+                    </div>
+
+                    {/* AI Actions */}
+                    <div className="flex items-center justify-between flex-wrap gap-2 pt-1">
+                      <div className="flex items-center gap-2">
+                        <Button
+                          size="sm"
+                          onClick={() => handleCopyReply(fb.id, currentReplyText)}
+                          className="text-xs font-bold bg-brand hover:bg-brand-hover text-white shadow-xs"
+                        >
+                          {copiedId === fb.id ? (
+                            <>
+                              <Check className="w-3.5 h-3.5 mr-1" />
+                              Copié !
+                            </>
+                          ) : (
+                            <>
+                              <Copy className="w-3.5 h-3.5 mr-1" />
+                              Copier le texte
+                            </>
+                          )}
+                        </Button>
+
+                        {fb.customer_contact && isEmail && (
+                          <a
+                            href={`mailto:${fb.customer_contact}?subject=Votre visite chez notre établissement&body=${encodeURIComponent(
+                              currentReplyText
+                            )}`}
+                          >
+                            <Button variant="outline" size="sm" className="text-xs font-semibold">
+                              <Send className="w-3 h-3 mr-1 text-brand" />
+                              Envoyer par courriel
+                            </Button>
+                          </a>
+                        )}
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => setActiveAiFeedbackId(null)}
+                        className="text-xs text-slate-400 hover:text-slate-600 underline"
+                      >
+                        Fermer l&apos;assistant
+                      </button>
+                    </div>
+                  </div>
+                )}
+
                 {/* Contact and Actions Footer */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-1">
                   <div className="text-xs text-slate-600 flex items-center gap-2">
@@ -192,15 +333,15 @@ export function FeedbackManager({ initialFeedbacks }: FeedbackManagerProps) {
 
                   {/* Actions */}
                   <div className="flex items-center gap-2">
-                    {fb.customer_contact && isEmail && (
-                      <a
-                        href={`mailto:${fb.customer_contact}?subject=Votre visite chez notre établissement&body=Bonjour ${fb.customer_name || ""}, nous vous remercions pour votre retour...`}
+                    {!isAiOpen && (
+                      <Button
+                        size="sm"
+                        onClick={() => handleOpenAi(fb)}
+                        className="text-xs font-bold bg-emerald-50 text-emerald-800 hover:bg-emerald-100 border border-emerald-200"
                       >
-                        <Button variant="outline" size="sm" className="text-xs">
-                          <Mail className="w-3 h-3 mr-1" />
-                          Écrire
-                        </Button>
-                      </a>
+                        <Sparkles className="w-3.5 h-3.5 mr-1 text-brand" />
+                        Répondre avec l&apos;IA
+                      </Button>
                     )}
 
                     <Button
@@ -213,7 +354,7 @@ export function FeedbackManager({ initialFeedbacks }: FeedbackManagerProps) {
                       {fb.status === "new" ? (
                         <>
                           <Check className="w-3.5 h-3.5 mr-1" />
-                          Marquer comme traité
+                          Résolu
                         </>
                       ) : (
                         <>

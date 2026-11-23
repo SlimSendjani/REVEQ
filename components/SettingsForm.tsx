@@ -5,7 +5,7 @@ import type { Business } from "@/types/domain";
 import { validateGoogleUrl } from "@/lib/validations/google-url";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { Check, CreditCard, ExternalLink, ShieldCheck } from "lucide-react";
+import { Check, CreditCard, ExternalLink, Sparkles } from "lucide-react";
 
 interface SettingsProps {
   business: Business;
@@ -14,7 +14,7 @@ interface SettingsProps {
 export function SettingsForm({ business }: SettingsProps) {
   const [googleUrl, setGoogleUrl] = useState(business.google_review_url);
   const [alertEmail, setAlertEmail] = useState(business.alert_email);
-  const [primaryColor, setPrimaryColor] = useState(business.primary_color || "#0E7470");
+  const [primaryColor, setPrimaryColor] = useState(business.primary_color || "#059669");
   const [language, setLanguage] = useState(business.default_lang || "FR");
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -35,11 +35,11 @@ export function SettingsForm({ business }: SettingsProps) {
       {/* General Configuration Card */}
       <form onSubmit={handleSave} className="bg-white p-6 sm:p-8 rounded-3xl border border-border shadow-xs space-y-6">
         <div>
-          <h2 className="text-lg font-bold text-foreground">
+          <h2 className="text-lg font-black text-foreground">
             Configuration du Commerce
           </h2>
           <p className="text-xs text-slate-500 mt-0.5">
-            Mettez à jour les paramètres de redirection et de notification de votre fiche.
+            Mettez à jour les paramètres de redirection et de notification de votre fiche REVEQ.
           </p>
         </div>
 
@@ -53,17 +53,17 @@ export function SettingsForm({ business }: SettingsProps) {
         />
 
         <Input
-          label="Courriel de notification des alertes d'insatisfaction"
+          label="Courriel de réception des alertes d'insatisfaction"
           type="email"
           value={alertEmail}
           onChange={(e) => setAlertEmail(e.target.value)}
-          helperText="Ce courriel reçoit immédiatement chaque retour négatif soumis en privé."
+          helperText="Ce courriel reçoit immédiatement chaque retour négatif et vous permet de répondre avec l'IA."
           required
         />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-semibold text-foreground mb-1.5">
+            <label className="block text-sm font-bold text-foreground mb-1.5">
               Couleur de marque
             </label>
             <div className="flex items-center gap-3">
@@ -73,20 +73,20 @@ export function SettingsForm({ business }: SettingsProps) {
                 onChange={(e) => setPrimaryColor(e.target.value)}
                 className="w-10 h-10 rounded-xl border border-border cursor-pointer p-0.5"
               />
-              <span className="font-mono text-xs text-slate-600 font-semibold">
+              <span className="font-mono text-xs text-slate-600 font-bold">
                 {primaryColor}
               </span>
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-foreground mb-1.5">
+            <label className="block text-sm font-bold text-foreground mb-1.5">
               Langue de l&apos;interface publique
             </label>
             <select
               value={language}
               onChange={(e) => setLanguage(e.target.value as "FR" | "EN" | "BOTH")}
-              className="w-full px-3.5 py-2.5 rounded-lg border border-border text-sm focus:outline-none focus:ring-2 focus:ring-brand/20 bg-white"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-border text-sm focus:outline-none focus:ring-2 focus:ring-brand/20 bg-white font-medium"
             >
               <option value="FR">Français québécois (Loi 96)</option>
               <option value="EN">English</option>
@@ -105,37 +105,38 @@ export function SettingsForm({ business }: SettingsProps) {
             <div />
           )}
 
-          <Button type="submit" size="md" className="font-bold">
+          <Button type="submit" size="md" className="font-bold bg-brand hover:bg-brand-hover text-white">
             Enregistrer les modifications
           </Button>
         </div>
       </form>
 
-      {/* Stripe Billing & Invoices Card */}
+      {/* Stripe Billing & Invoices Card (Single 79$ Plan) */}
       <div className="bg-white p-6 sm:p-8 rounded-3xl border border-border shadow-xs space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
+            <h2 className="text-lg font-black text-foreground flex items-center gap-2">
               <CreditCard className="w-5 h-5 text-brand" />
               Facturation & Abonnement Stripe
             </h2>
             <p className="text-xs text-slate-500 mt-0.5">
-              Gérez votre carte de paiement, consultez vos factures ou modifiez votre formule.
+              Gérez votre moyen de paiement, téléchargez vos reçus et factures.
             </p>
           </div>
 
-          <span className="text-xs font-bold px-3 py-1 rounded-full bg-emerald-100 text-emerald-800">
-            Abonnement Actif
+          <span className="text-xs font-black px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 flex items-center gap-1">
+            <Sparkles className="w-3.5 h-3.5 text-brand" />
+            79 $ / mois
           </span>
         </div>
 
-        <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-600 space-y-2">
-          <div className="flex items-center justify-between font-semibold text-foreground">
-            <span>Formule actuelle : Forfait Solo</span>
-            <span>29.00 $ CAD / mois</span>
+        <div className="p-4 rounded-2xl bg-emerald-50/50 border border-emerald-200 text-xs text-slate-700 space-y-2">
+          <div className="flex items-center justify-between font-black text-foreground">
+            <span>Formule active : Forfait REVEQ Intégral</span>
+            <span>79.00 $ CAD / mois</span>
           </div>
           <p className="text-[11px] text-slate-500">
-            Facturation automatisée via Stripe. Paiement sécurisé avec carte de crédit ou débit.
+            Comprend le filtre intelligent 5★, l&apos;assistant IA de réponse aux clients, le mode borne caisse et les kits PDF illimités.
           </p>
         </div>
 
@@ -143,7 +144,7 @@ export function SettingsForm({ business }: SettingsProps) {
           <Button
             variant="outline"
             size="md"
-            onClick={() => alert("Redirection vers le portail de facturation sécurisé Stripe.")}
+            onClick={() => alert("Redirection vers le portail client sécurisé Stripe.")}
             className="text-xs font-bold flex items-center gap-1.5"
           >
             <span>Ouvrir le Portail Client Stripe</span>
