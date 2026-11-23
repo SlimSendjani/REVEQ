@@ -31,7 +31,13 @@ const config: Config = {
         border: "#1E293B",
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "system-ui", "-apple-system", "sans-serif"],
+        sans: [
+          "'Plus Jakarta Sans'",
+          "var(--font-plus-jakarta)",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "sans-serif",
+        ],
       },
       boxShadow: {
         glow: "0 0 35px -5px rgba(0, 245, 155, 0.25)",

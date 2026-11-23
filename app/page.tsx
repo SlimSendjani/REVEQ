@@ -21,15 +21,15 @@ export default function HomePage() {
             linear-gradient(to bottom, #e2e8f0 1px, transparent 1px)
           `,
           backgroundSize: "35px 35px",
-          maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 45%, rgba(0,0,0,0.15) 75%, rgba(0,0,0,0) 100%)",
-          WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 45%, rgba(0,0,0,0.15) 75%, rgba(0,0,0,0) 100%)",
+          maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.92) 65%, rgba(0,0,0,0.15) 90%, transparent 100%)",
+          WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.92) 65%, rgba(0,0,0,0.15) 90%, transparent 100%)",
         }}
       />
 
       {/* Background Soft Glow Auras matching exact sampled colors */}
       {/* Left aura: Teal/cyan #48b1b6 */}
       <div 
-        className="absolute top-[340px] left-[2%] sm:left-[8%] w-[420px] h-[360px] rounded-full pointer-events-none z-0"
+        className="absolute top-[320px] left-[2%] sm:left-[8%] w-[420px] h-[360px] rounded-full pointer-events-none z-0"
         style={{
           background: "#48b1b6",
           filter: "blur(110px)",
@@ -38,11 +38,11 @@ export default function HomePage() {
       />
       {/* Right aura: Slate-indigo #7c8ba1 */}
       <div 
-        className="absolute top-[360px] right-[2%] sm:right-[8%] w-[440px] h-[380px] rounded-full pointer-events-none z-0"
+        className="absolute top-[340px] right-[2%] sm:right-[8%] w-[440px] h-[380px] rounded-full pointer-events-none z-0"
         style={{
           background: "#7c8ba1",
           filter: "blur(120px)",
-          opacity: 0.4,
+          opacity: 0.40,
         }}
       />
 
@@ -51,18 +51,18 @@ export default function HomePage() {
 
       {/* 2. HERO SECTION */}
       <section className="relative pt-6 pb-12 sm:pt-10 sm:pb-16 z-10">
-        <div className="max-w-5xl mx-auto px-4 text-center">
+        <div className="max-w-4xl mx-auto px-4 text-center">
           
           {/* Top Pill Tag */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0e636a]/10 border border-[#0e636a]/20 text-[#0e636a] text-xs font-semibold shadow-2xs mb-5">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0e636a]/10 border border-[#0e636a]/20 text-[#0e636a] text-xs font-semibold shadow-2xs mb-5">
             <span>Sécuriser les commerces et restos d&apos;ici</span>
             <span>⚜️🍁</span>
           </div>
 
           {/* Main Headline H1 matching reference */}
-          <h1 className="text-3xl sm:text-5xl lg:text-[52px] font-black tracking-tight text-slate-900 leading-[1.14] max-w-3xl mx-auto">
+          <h1 className="text-3xl sm:text-5xl lg:text-[46px] font-extrabold tracking-[-0.03em] text-slate-900 leading-[1.15] max-w-3xl mx-auto">
             Ne laissez plus un seul{" "}
-            <span className="text-[#de4830] font-black">
+            <span className="text-[#de4830] font-extrabold">
               avis 1<span className="text-[#faa71d]">★</span>
             </span>
             <br className="hidden sm:inline" />{" "}
@@ -70,7 +70,7 @@ export default function HomePage() {
           </h1>
 
           {/* Subtitle matching reference */}
-          <p className="mt-4 text-sm sm:text-base lg:text-[17px] text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed">
+          <p className="mt-4 text-sm sm:text-base lg:text-[16px] text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed">
             La solution simple pour transformer vos clients satisfaits en avis 5<span className="text-[#faa71d]">★</span> sur Google Maps
             <br className="hidden sm:inline" />
             et recevoir les critiques en privé, avant qu&apos;elles ne nuisent à votre réputation.
@@ -79,7 +79,7 @@ export default function HomePage() {
           {/* CTAs matching reference */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-6">
             <Link href="/onboarding" className="w-full sm:w-auto">
-              <button className="w-full sm:w-auto bg-[#0e636a] hover:bg-[#0b5258] text-white font-bold text-sm sm:text-base px-6 py-3 rounded-lg transition-all shadow-sm hover:shadow flex items-center justify-center gap-2">
+              <button className="w-full sm:w-auto bg-[#0e636a] hover:bg-[#0b5258] text-white font-semibold text-sm sm:text-base px-6 py-3 rounded-lg transition-all shadow-sm hover:shadow flex items-center justify-center gap-2">
                 <span>Essai gratuit de 7 jours</span>
                 <span>→</span>
               </button>
