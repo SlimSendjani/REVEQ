@@ -1,0 +1,46 @@
+export const fr = {
+  common: {
+    appName: "Kit Réputation Google",
+    tagline: "Plateforme Libre-Service pour Commerces Locaux au Québec",
+    loading: "Chargement...",
+    error: "Une erreur est survenue",
+    save: "Enregistrer",
+    cancel: "Annuler",
+    send: "Envoyer",
+  },
+  publicPage: {
+    question: "Comment s'est déroulée votre expérience aujourd'hui ?",
+    positiveRedirecting: "Merci beaucoup ! Redirection vers Google pour partager votre avis...",
+    leaveReviewDirectly: "Publier directement sur Google",
+    privateFeedbackTitle: "Aidez-nous à nous améliorer",
+    privateFeedbackSubtitle: "Votre avis sera transmis directement et en toute confidentialité à la direction.",
+    namePlaceholder: "Votre nom (facultatif)",
+    contactPlaceholder: "Courriel ou numéro de téléphone (facultatif)",
+    messagePlaceholder: "Dites-nous ce qui n'a pas été à la hauteur de vos attentes...",
+    submitFeedback: "Envoyer à la direction",
+    feedbackSuccess: "Merci pour votre franchise. Votre message a été transmis à la direction.",
+    serviceUnavailable: "Ce service est momentanément indisponible.",
+    law25Notice: "En soumettant ce formulaire, vous consentez à ce que vos coordonnées soient utilisées exclusivement pour faire le suivi de votre visite, conformément à la Loi 25 du Québec.",
+  },
+  onboarding: {
+    title: "Configurez votre Kit Réputation en 3 minutes",
+    businessNameLabel: "Nom de votre établissement",
+    slugLabel: "Identifiant unique (URL de votre QR Code)",
+    googleUrlLabel: "Lien direct d'avis Google Maps",
+    googleUrlHelp: "Ouvrez votre profil d'établissement Google Maps et cliquez sur 'Demander des avis' pour copier le lien court.",
+    emailLabel: "Courriel pour recevoir les alertes privées",
+    submitButton: "Créer mon Kit et commencer l'essai gratuit de 7 jours",
+  },
+  dashboard: {
+    overview: "Vue d'ensemble",
+    feedback: "Retours privés",
+    kit: "Kit d'impression",
+    settings: "Paramètres",
+    totalScans: "Total des scans",
+    googleRedirects: "Redirections 5 étoiles",
+    privateIntercepts: "Insatisfactions interceptées",
+    averageRating: "Note moyenne estimée",
+  },
+};
+
+export type Dictionary = typeof fr;

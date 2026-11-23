@@ -1,0 +1,404 @@
+﻿Kit Réputation Google 100 % en Ligne
+Documentation Technique d'Architecture et Spécifications Développement MVP
+Ce document définit les spécifications techniques et fonctionnelles complètes pour l'implémentation du SaaS Kit Réputation Google. L'objectif clé est d'assurer une infrastructure sans coût fixe d'infrastructure (< 50 $/mois) tout en garantissant des performances optimales et une expérience utilisateur mobile de premier ordre.
+
+
+________________
+
+
+1. Architecture Globale & Stack Technique
+L'architecture repose sur un modèle Serverless / Edge-first afin de maximiser la gratuité durant la phase de lancement et de garantir une montée en charge fluide sans maintenance d'infrastructure.
+
+
+* Frontend & Backend Fullstack : Next.js (App Router, TypeScript, Tailwind CSS) hébergé sur Vercel (Palier Hobby : 0 $/mois) ou Cloudflare Pages. Utilisation des Server Actions et Route Handlers.
+* Base de Données & Auth : Supabase (PostgreSQL géré, Auth avec Email/Magic Links, Storage pour les logos). Palier gratuit jusqu'à 50,000 utilisateurs actifs mensuels et 500 MB de données.
+* Paiements & Abonnements : Stripe Checkout & Customer Portal. Gestion des événements via Webhooks synchronisés dans Supabase.
+* Emails Transactionnels & Rapports : Resend (API REST & React Email). Gratuit jusqu'à 3 000 emails/mois (100 emails/jour).
+* Génération QR Code & PDF : 100 % côté client dans le navigateur avec qrcode (ou qrcode.react) et @react-pdf/renderer (ou jspdf). Coût processeur serveur : 0 $.
+Budget Mensuel Estimé
+Service
+	Composant
+	Coût Ph. 1 (0 à 100 clients)
+	Coût Ph. 2 (100 à 300 clients)
+	Vercel / Cloudflare
+	Hébergement App & Edge API
+	0.00 $
+	20.00 $ / mois (Vercel Pro)
+	Supabase
+	DB, Auth & File Storage
+	0.00 $
+	0.00 $ à 25.00 $ / mois
+	Stripe
+	Traitement des abonnements
+	2.9% + 0.30$ / transaction
+	2.9% + 0.30$ / transaction
+	Resend
+	Notification & Rapports mensuels
+	0.00 $ (limite 3 000/m)
+	20.00 $ / mois (Pro 50k/m)
+	Nom de domaine
+	Domaine principal + DNS
+	~1.25 $ (15.00 $/an)
+	~1.25 $ / mois
+	TOTAL FIXE ESTIMÉ
+	
+
+	< 2.00 $ / mois
+	41.25 $ à 66.25 $ / mois
+	
+
+________________
+
+
+2. Direction Artistique & UI/UX
+La charte graphique vise l'institutionnel moderne : sobriété, clarté et rassurance immédiate.
+
+
+* Fond principal : Blanc Pur (#FFFFFF) et fond secondaire Gris Ultra-Pâle (#F8FAFC).
+* Typographie & Éléments d'action : Noir Profond (#0F172A / #000000).
+* Couleur d'accentuation : Sarcelle Institutionnel (#0E7470) pour badges de validation, états actifs et indicateurs de conversion.
+* Système d'évaluation : Étoiles Dorées (#F59E0B).
+* Mobile-First Strict : Layout cible pour la route /[slug] optimisé pour les écrans 375px–430px (99 % des interactions se font sur smartphone via scan QR sur site).
+
+
+________________
+
+
+3. Parcours Utilisateur & Spécifications Fonctionnelles
+[Visiteur] ──> Landing Page (/) ──> Onboarding (/onboarding) ──> Stripe Checkout
+                                                                        │
+                                                                        ▼
+[Client Mobile] ──> Scan QR (/[slug]) ──< Sync Statut <── DB Supabase <── Webhook Stripe
+         │
+         ├── (4-5 ★) ──> Event scan_positive ──> Redirection Google Reviews
+         │
+         └── (1-3 ★) ──> Event scan_negative ──> Formulaire Privé ──> Resend API ──> Email Gérant
+A. Landing Page (/)
+* Hero Section : Proposition de valeur claire ("Transformez vos clients satisfaits en avis Google 5 étoiles"), démo dynamique du QR code.
+* Module de Démo Interactive : Simulation d'un scan client directement dans un composant de téléphone virtuel.
+* Tarification Transparente : Affichage de l'offre unique (ex: 29 $/mois sans engagement) avec calcul du ROI.
+* CTA Principal : "Créer mon Kit Gratuitment".
+B. Onboarding Autonome (/onboarding)
+* Étape 1 : Formulaire d'information
+   * Nom de l'établissement.
+   * Slug unique (ex: app.domaine.com/boulangerie-martin).
+   * URL directe d'avis Google Maps (incluant une info-bulle explicative sur la récupération du lien direct Google Business).
+   * Adresse email de réception des alertes de retours négatifs.
+   * Téléversement du logo (enregistré sous logos/{business_id}.png).
+   * Langue de l'interface publique (FR, EN, ou Bilingue avec détection navigateur).
+* Étape 2 : Prévisualisation en direct
+   * Rendu instantané du rendu mobile /[slug] à droite de l'écran avec mise à jour temps réel des entrées.
+* Étape 3 : Conversion Stripe
+   * Redirection vers Stripe Checkout (7 jours d'essai).
+   * La validation déclenche la génération et l'accès au tableau de bord.
+C. Page Publique de Filtre (/[slug])
+1. Vérification d'accès : Requête au niveau du middleware ou Server Component. Si subscription_status n'est pas active ou trialing, affichage d'un composant statique neutre : "Ce service est momentanément indisponible".
+2. Interface Utilisateur : Logo, Nom du commerce, Sélecteur de langue rapide, Intitulé "Comment s'est déroulée votre expérience ?", Composant de 5 étoiles interactives.
+3. Logique de Routage à la sélection :
+   * Étoiles 4 ou 5 (Parcours Positif) :
+      * Création asynchrone d'une entrée dans scan_events (rating, routed_to: 'google').
+      * Affichage d'un message d'attente (1.5s) : "Merci ! Votre avis sur Google nous aide énormément."
+      * Redirection automatique (window.location.href) vers google_review_url.
+   * Étoiles 1, 2 ou 3 (Parcours Constructif / Interception) :
+      * Création asynchrone d'une entrée dans scan_events (rating, routed_to: 'private').
+      * Ouverture fluide d'un formulaire de retours : Zone de texte pour le message, champs optionnels Nom et Téléphone/Email.
+      * Soumission au point d'accès /api/feedback : Sauvegarde dans private_feedbacks + envoi immédiat d'un email au gérant via Resend.
+      * Conformité Google Anti-Gating : Affichage discret en bas d'écran d'un lien textuel secondaire : "Publier directement sur Google".
+D. Tableau de Bord Commerçant (/dashboard)
+* Métriques clés : Total scans, % de redirections Google (4-5★), nombre d'avis privés interceptés (1-3★), score moyen estimé.
+* Onglet Kit Réputation :
+   * Génération et téléchargement dynamique du PDF "Affiche Comptoir" (Format A4/A5, instructions + QR Code HD vectoriel).
+   * Génération du PDF "Planche d'autocollants / Cartes de visite".
+   * Bouton de copie d'URL courte + Ouverture du Mode Écran de Comptoir (/kiosk/[slug]) sans veille pour tablettes en caisse.
+* Onglet Retours Privés : Liste filtrable des messages reçus avec possibilité de marquer comme "Traité" (status: 'resolved').
+* Onglet Paramètres : Modification de l'URL Google, de l'email d'alerte, du logo et redirection vers le Portail Client Stripe (gestion carte / facture).
+
+
+________________
+
+
+4. Schéma de Base de Données (Supabase PostgreSQL)
+Exécutez ce script dans le SQL Editor de Supabase pour créer la structure de données, les index et les politiques de sécurité (RLS).
+
+
+-- Nettoyage si réinstallation
+DROP TABLE IF EXISTS public.private_feedbacks CASCADE;
+DROP TABLE IF EXISTS public.scan_events CASCADE;
+DROP TABLE IF EXISTS public.businesses CASCADE;
+
+
+-- 1. Table des Commerces / Établissements
+CREATE TABLE public.businesses (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+    name TEXT NOT NULL,
+    slug TEXT NOT NULL UNIQUE,
+    google_review_url TEXT NOT NULL,
+    alert_email TEXT NOT NULL,
+    logo_url TEXT,
+    primary_color TEXT DEFAULT '#0E7470',
+    default_lang TEXT DEFAULT 'FR' CHECK (default_lang IN ('FR', 'EN', 'BOTH')),
+    stripe_customer_id TEXT,
+    stripe_subscription_id TEXT,
+    subscription_status TEXT DEFAULT 'inactive',
+    plan_tier TEXT DEFAULT 'standard',
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+
+-- Index pour requêtes rapides via slug (Crucial pour /[slug])
+CREATE INDEX idx_businesses_slug ON public.businesses(slug);
+CREATE INDEX idx_businesses_user_id ON public.businesses(user_id);
+
+
+-- 2. Table des Événements de Scan (Analytics)
+CREATE TABLE public.scan_events (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    business_id UUID NOT NULL REFERENCES public.businesses(id) ON DELETE CASCADE,
+    rating INT NOT NULL CHECK (rating >= 1 AND rating <= 5),
+    routed_to TEXT NOT NULL CHECK (routed_to IN ('google', 'private')),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+
+CREATE INDEX idx_scan_events_business_id ON public.scan_events(business_id);
+CREATE INDEX idx_scan_events_created_at ON public.scan_events(created_at);
+
+
+-- 3. Table des Retours Privés Interceptés (1-3 étoiles)
+CREATE TABLE public.private_feedbacks (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    business_id UUID NOT NULL REFERENCES public.businesses(id) ON DELETE CASCADE,
+    rating INT NOT NULL CHECK (rating >= 1 AND rating <= 3),
+    customer_name TEXT,
+    customer_contact TEXT,
+    message TEXT NOT NULL,
+    status TEXT DEFAULT 'new' CHECK (status IN ('new', 'resolved')),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+
+CREATE INDEX idx_private_feedbacks_business ON public.private_feedbacks(business_id);
+
+
+-- 4. Activer Row Level Security (RLS)
+ALTER TABLE public.businesses ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.scan_events ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.private_feedbacks ENABLE ROW LEVEL SECURITY;
+
+
+-- 5. Politiques RLS (Row Level Security)
+
+
+-- Business: Lecture publique (nécessaire pour afficher la page /[slug])
+-- Utilisation d'une vue sécurisée ou restriction des colonnes sensibles si nécessaire
+CREATE POLICY "Lecture publique des commerces par slug" 
+ON public.businesses FOR SELECT 
+USING (true);
+
+
+-- Business: Modification/Lecture complète réservée au propriétaire authentifié
+CREATE POLICY "Propriétaire gère son commerce" 
+ON public.businesses FOR ALL 
+TO authenticated 
+USING (auth.uid() = user_id)
+WITH CHECK (auth.uid() = user_id);
+
+
+-- Scan Events: Insertion autorisée pour tout le monde (utilisateurs anonymes qui scannent)
+CREATE POLICY "Insertion publique des événements de scan" 
+ON public.scan_events FOR INSERT 
+TO anon, authenticated 
+WITH CHECK (true);
+
+
+-- Scan Events: Lecture réservée au propriétaire du commerce
+CREATE POLICY "Propriétaire lit ses statistiques de scan" 
+ON public.scan_events FOR SELECT 
+TO authenticated 
+USING (
+    business_id IN (
+        SELECT id FROM public.businesses WHERE user_id = auth.uid()
+    )
+);
+
+
+-- Private Feedbacks: Insertion publique autorisée (envoi du formulaire)
+CREATE POLICY "Insertion publique des retours privés" 
+ON public.private_feedbacks FOR INSERT 
+TO anon, authenticated 
+WITH CHECK (true);
+
+
+-- Private Feedbacks: Lecture et mise à jour réservées au propriétaire
+CREATE POLICY "Propriétaire gère ses retours privés" 
+ON public.private_feedbacks FOR ALL 
+TO authenticated 
+USING (
+    business_id IN (
+        SELECT id FROM public.businesses WHERE user_id = auth.uid()
+    )
+);
+
+________________
+
+
+5. Arborescence des Fichiers & Webhooks
+A. Structure des Dossiers (Next.js App Router)
+├── app/
+│   ├── (auth)/
+│   │   ├── login/page.tsx
+│   │   └── signup/page.tsx
+│   ├── (dashboard)/
+│   │   └── dashboard/
+│   │       ├── page.tsx (Stats)
+│   │       ├── kit/page.tsx (Génération PDF)
+│   │       ├── feedbacks/page.tsx (Liste 1-3★)
+│   │       └── settings/page.tsx (Configuration & Stripe)
+│   ├── (public)/
+│   │   ├── page.tsx (Landing Page)
+│   │   ├── onboarding/page.tsx
+│   │   ├── [slug]/page.tsx (Page dynamique de notation mobile)
+│   │   └── kiosk/[slug]/page.tsx (Mode écran plein pour tablette)
+│   └── api/
+│       ├── feedback/route.ts (Envoi avis privé + notification Resend)
+│       ├── stripe/
+│       │   ├── checkout/route.ts (Création session d'abonnement)
+│       │   └── webhook/route.ts (Ecoute des événements Stripe)
+│       └── cron/
+│           └── monthly-report/route.ts (Rapport mensuel automatique)
+├── components/
+│   ├── ui/ (Button, Card, Input, Modal...)
+│   ├── PreviewMobile.tsx
+│   └── PdfTemplate.tsx
+├── lib/
+│   ├── supabase/
+│   │   ├── client.ts
+│   │   └── server.ts
+│   ├── stripe.ts
+│   ├── resend.ts
+│   └── pdf-generator.ts
+└── middleware.ts
+B. Traitement des Webhooks Stripe (/api/stripe/webhook/route.ts)
+Le webhook doit écouter les évènements de facturation pour mettre à jour en temps réel le statut d'accès (subscription_status) dans PostgreSQL.
+
+
+import { headers } from 'next/headers';
+import { NextResponse } from 'next/server';
+import { stripe } from '@/lib/stripe';
+import { createAdminClient } from '@/lib/supabase/server';
+
+
+export async function POST(req: Request) {
+  const body = await req.text();
+  const signature = headers().get('stripe-signature') as string;
+
+
+  let event;
+  try {
+    event = stripe.webhooks.constructEvent(
+      body,
+      signature,
+      process.env.STRIPE_WEBHOOK_SECRET!
+    );
+  } catch (err: any) {
+    return new NextResponse(`Webhook Error: ${err.message}`, { status: 400 });
+  }
+
+
+  const supabase = createAdminClient();
+
+
+  switch (event.type) {
+    case 'checkout.session.completed': {
+      const session = event.data.object as any;
+      await supabase
+        .from('businesses')
+        .update({
+          stripe_customer_id: session.customer,
+          stripe_subscription_id: session.subscription,
+          subscription_status: 'active',
+        })
+        .eq('user_id', session.client_reference_id);
+      break;
+    }
+    case 'customer.subscription.updated': {
+      const subscription = event.data.object as any;
+      await supabase
+        .from('businesses')
+        .update({ subscription_status: subscription.status })
+        .eq('stripe_subscription_id', subscription.id);
+      break;
+    }
+    case 'customer.subscription.deleted': {
+      const subscription = event.data.object as any;
+      await supabase
+        .from('businesses')
+        .update({ subscription_status: 'canceled' })
+        .eq('stripe_subscription_id', subscription.id);
+      break;
+    }
+  }
+
+
+  return NextResponse.json({ received: true }, { status: 200 });
+}
+C. Cron Mensuel de Rapport ROI (/api/cron/monthly-report/route.ts)
+Configuré sur Vercel Cron via vercel.json (Exécution le 1er du mois à 9h00 EST).
+
+
+{
+  "crons": [
+    {
+      "path": "/api/cron/monthly-report",
+      "schedule": "0 14 1 * *"
+    }
+  ]
+}
+
+Logique de l'Endpoint Cron :
+
+
+1. Vérification du header d'autorisation Authorization: Bearer ${process.env.CRON_SECRET}.
+2. Requête Supabase : Récupération des commerces actifs avec le décompte des 30 derniers jours de scan_events et private_feedbacks.
+3. Génération dynamique du contenu HTML de l'email via Resend.
+4. Envoi groupé récapitulant :
+   * Nombre total de scans.
+   * Nombre de clients redirigés vers Google.
+   * Nombre de retours négatifs interceptés avant publication sur internet.
+
+
+________________
+
+
+6. Sécurité & Configuration Environnementale
+A. Valider l'URL Google Review & Rate Limiting
+Afin d'éviter toute injection d'URL malveillante ou de spam, la validation de l'URL Google s'effectue côté serveur au moment de la sauvegarde :
+
+
+const GOOGLE_URL_PATTERN = /^https:\/\/(g\.page|search\.google\.com|maps\.google\.com|goo\.gl)\/.*$/;
+
+
+export function validateGoogleUrl(url: string): boolean {
+  return GOOGLE_URL_PATTERN.test(url);
+}
+
+Pour l'endpoint /api/feedback, un contrôle strict du débit (Rate Limiting) doit être appliqué sur l'adresse IP cliente via Upstash Redis (gratuit) ou un middleware en mémoire Edge pour bloquer plus de 3 soumissions par minute par IP.
+B. Variables d'Environnement (.env.local)
+v
+APP CONFIG
+NEXT_PUBLIC_APP_URL=https://votre-domaine.com
+SUPABASE (Client & Service Role)
+NEXT_PUBLIC_SUPABASE_URL=https://xxxx.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOi...
+SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOi...
+STRIPE
+STRIPE_SECRET_KEY=sk_live_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_...
+NEXT_PUBLIC_STRIPE_PRICE_ID=price_...
+RESEND EMAIL API
+RESEND_API_KEY=re_...
+EMAIL_FROM="Kit Réputation notifications@votre-domaine.com"
+CRON SECURITY
+CRON_SECRET=votre_cle_secrete_cron_generee

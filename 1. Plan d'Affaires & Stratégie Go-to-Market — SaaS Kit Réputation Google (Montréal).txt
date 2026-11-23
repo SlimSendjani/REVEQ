@@ -1,0 +1,218 @@
+﻿Plan d'Affaires : Kit Réputation Google SaaS
+Plateforme Libre-Service pour Commerces Locaux au Québec
+________________
+
+
+1. Résumé Exécutif & Proposition de Valeur
+Concept Produit
+Le Kit Réputation Google est un logiciel SaaS en libre-service 100 % digital conçu exclusivement pour les commerces de proximité (restaurants, cafés, salons de coiffure, cliniques privées, garages et spas) à Montréal et à travers le Québec. La plateforme permet de convertir systématiquement chaque client satisfait en avis 5 étoiles sur Google Maps tout en captant les retours négatifs via un formulaire privé avant qu’ils n’impactent la réputation publique de l'établissement.
+
+
+* Zéro logistique : Fonctionnement entièrement dématérialisé, sans stock physique ni livraison de plaques.
+* Autonomie complète : Déploiement en libre-service en moins de 3 minutes par le commerçant.
+Problème du Marché & Enjeux Financiers
+Dans le commerce local, un seul avis 1 étoile non filtré peut entraîner des pertes financières directes chiffrées en milliers de dollars en dégradant le positionnement dans le pack local de Google Maps.
+
+
+Les solutions de gestion de réputation du marché (telles que Podium ou Birdeye) imposent des tarifs prohibitifs variant entre 300 $ et 600 $ CAD par mois, assortis de contrats annuels contraignants et de fonctionnalités surdimensionnées. À l'inverse, l'utilisation de codes QR gratuits ou générés via des outils génériques envoie indistinctement tous les clients — qu'ils soient satisfaits ou mécontents — directement sur la fiche Google du commerce.
+Avantage Compétitif au Québec
+* Configuration Express : Prêt à l'emploi en 3 minutes sans assistance technique.
+* Conformité Régionale Native : Interface et supports 100 % bilingues (FR-QC / EN) rigoureusement adaptés aux exigences de la Loi 96.
+* Tarification à Achat Impulsif : Modèle d'abonnement flexible de 29 $ à 39 $ CAD par mois, sans engagement de durée.
+* Contrôle d'Accès Dynamique : Redirection gérée à distance via l'abonnement actif.
+* Kit Média Téléchargeable : Génération instantanée en 1 clic de supports optimisés pour l'impression (PDF haute définition), de liens courts dynamiques et d'un mode écran pour tablette.
+
+
+________________
+
+
+2. Analyse de Marché & Concurrence (Montréal / Québec)
+Analyse Comparative des Solutions
+Critère / Solution
+	Podium / Birdeye
+	Agences / GoHighLevel
+	QR Codes Gratuits / Canva
+	Notre SaaS
+	Tarif Mensuel
+	300 $ – 600 $ CAD / mois
+	150 $ – 300 $ CAD / mois
+	0 $
+	29 $ – 39 $ CAD / mois
+	Engagement
+	Annuel obligatoire
+	Variable (+ frais d'installation)
+	Aucun
+	Mensuel (sans engagement)
+	Filtre Privé Anti-Avis Négatif
+	Oui
+	Oui
+	Non (0 % de rétention)
+	Oui (Formulaire intelligent)
+	Déploiement
+	Complexe (délai 14 jours)
+	Manuel via agence
+	Manuel
+	100 % Autonome (3 minutes)
+	Bilinguisme Loi 96
+	Partiel / Anglais natif
+	Selon l'agence
+	À créer soi-même
+	Nativement FR-QC / EN
+	Statistiques & Rapports
+	Complexe
+	Manuel
+	Aucun
+	Rapport mensuel automatique
+	Niches Prioritaires — Grand Montréal
+* Restauration, Cafés & Bars : Volumétrie de passage élevée, sensibilité extrême aux notes sur Google Maps.
+* Salons de Coiffure, Barbiers & Esthétique : Clientèle récurrente, forte valeur liée à la recommandation directe.
+* Cliniques Privées (Dentistes, Physio, Optométrie, Vétérinaires) : Panier moyen élevé, importance critique de la confiance initiale.
+* Services Auto (Garages, Esthétique Automobile) : Volume important de transactions, nécessité d'atténuer la friction liée aux coûts de réparation.
+* Commerces de Services à Domicile (Nettoyage, Déménagement) : Utilisation intensive des liens courts sur les factures et reçus numériques.
+
+
+________________
+
+
+3. Produit & Mécanismes de Rétention (Anti-Churn)
+Les 3 Livrables Digitalisés Générés
+1. Kit d'Impression HD (Format PDF) : Génération automatique d'une affiche de comptoir (format demi-lettre) et de planches d'autocollants/cartes personnalisées aux couleurs du commerce avec logo intégré.
+2. Lien Court Dynamique Intelligente : URL personnalisée intégrant la logique de redirection, prête à être incorporée dans les factures virtuelles (Square, QuickBooks), les messages texte de confirmation de rendez-vous ou la bio des réseaux sociaux.
+3. Mode Écran Comptoir : Interface web responsive optimisée pour l'affichage plein écran continu sur iPad ou tablette au point de caisse.
+Mécanismes d'Ingénierie Anti-Résiliation
+                              [ Client Scanne le QR Code / Clique le Lien ]
+                                                   │
+                                     ──────────────┴──────────────
+                                    │                             │
+                        [ Évaluation : 4-5 Étoiles ]    [ Évaluation : 1-3 Étoiles ]
+                                    │                             │
+                                    ▼                             ▼
+                        Redirection Fiche Google Maps    Formulaire de Feedback Privé
+                        (Avis Public 5 Étoiles)          (Alerte Courriel Instantanée)
+                                                                  │
+                                                                  ▼
+                                                      Interception par le Commerce
+                                                      (Résolution Interne du Problème)
+
+* Dépendance au Lien Dynamique : En cas d'arrêt de l'abonnement, la redirection du QR code signale l'interruption du service. Les supports imprimés perdent leur fonctionnalité d'interception, incitant au maintien du compte.
+* Démonstration Automatique de Valeur (Rapport ROI Mensuel) : Envoi automatique d'un bilan par courriel récapitulant les performances : "Ce mois-ci : 24 nouveaux avis 5 étoiles générés et 3 insatisfactions interceptées en privé."
+* Alertes d'Urgence Instantanées : Notification immédiate par courriel à la réception d'un retour négatif, permettant au propriétaire d'intervenir avant toute publication externe.
+* Assistant de Réponse Bilingue : Modèles de réponses pré-rédigés en français et en anglais accessibles en 1 clic pour accélérer la gestion des avis reçus.
+
+
+________________
+
+
+4. Modèle Économique & Projections Financières
+Grille Tarifaire (Dollar Canadien - CAD)
+* Période d'Essai : 7 jours d'essai gratuit (activation par carte bancaire ou aperçu interactif en ligne).
+* Forfait Solo — 29 $ CAD / mois (ou 290 $ / an — 2 mois gratuits)
+   * 1 emplacement Google Maps
+   * QR Code et lien dynamique
+   * Générateur de supports PDF
+   * Notifications d'alerte et rapport mensuel
+* Forfait Pro / Multi-Sites — 49 $ CAD / mois (ou 490 $ / an — 2 mois gratuits)
+   * Jusqu'à 3 emplacements
+   * Suppressions de toutes les mentions de la plateforme
+   * Modèles de réponses pré-rédigés
+   * Analytics avancés
+Structure des Coûts Fixes Opérationnels
+Poste de Dépense
+	Fournisseur / Solution
+	Coût Mensuel Estimé (CAD)
+	Nom de Domaine
+	Cloudflare Registrar
+	~1,50 $
+	Hébergement Frontend
+	Cloudflare Pages / Vercel
+	0,00 $ (Tier gratuit)
+	Base de Données & Authentification
+	Supabase
+	0,00 $ (Tier gratuit)
+	Service d'Envoi de Courriels
+	Resend
+	0,00 $ (Tier gratuit)
+	Frais de Transaction
+	Stripe
+	2,9 % + 0,30 $ par transaction
+	Total Fixe Mensuel
+	
+
+	< 25,00 $ CAD
+	Trajectoire Financière à 12 Mois (Objectif 10 000 $ MRR)
+Jalon
+	Nombre de Clients Payants
+	Marge Brut Estimée
+	Revenu Mensuel Récurrent (MRR)
+	Mois 1
+	10 clients
+	> 95 %
+	350 $ CAD
+	Mois 3
+	45 clients
+	> 95 %
+	1 600 $ CAD
+	Mois 6
+	120 clients
+	> 93 %
+	4 500 $ CAD
+	Mois 12
+	280 clients (incluant multi-sites)
+	> 90 %
+	10 200 $ CAD
+	
+
+________________
+
+
+5. Stratégie Go-To-Market (100 % à Distance)
+Canal 1 — Outreach Direct Hyper-Ciblé (Semaines 1 à 4)
+* Cible : Commerces du Grand Montréal affichant une note comprise entre 3,5 et 4,3 étoiles sur Google Maps avec plus de 20 avis.
+* Action : Prospection via Instagram DM / Courriel à raison de 25 à 30 prises de contact par jour.
+* Message : Envoi d'un lien d'aperçu personnalisé prêt à l'emploi au nom de leur établissement pour démontrer l'impact visuel et fonctionnel.
+Canal 2 — Stratégie de Contenu Organique (Continu)
+* Format : Vidéos courtes (TikTok, Instagram Reels, YouTube Shorts) à raison de 3 à 4 publications par semaine.
+* Contenu : Mises en situation concrètes de 15 secondes montrant la différence entre un QR code classique et la solution avec filtrage privé.
+* Ciblage : Entrepreneurs et propriétaires de commerces situés au Québec.
+Canal 3 — Acquisition Payante Optimisée (Dès 5 000 $ MRR)
+* Budget : Réinvestissement de 200 $ à 300 $ CAD par mois prélevés sur les revenus récurrents.
+* Canaux : Sponsoring des publications vidéo organiques performantes sur Meta Ads et TikTok Ads.
+* Ciblage Géographique : Province de Québec / Région métropolitaine de Montréal.
+
+
+________________
+
+
+6. Conformité Réglementaire & Cadre Légal
+Alignement avec les Lignes Directrices de Google ("Review Gating")
+Pour respecter les conditions d'utilisation de Google relatives à la neutralité des avis, le système n'empêche pas techniquement la publication d'avis négatifs. L'interface affiche le formulaire d'interception privée de manière prédominante pour les notes de 1 à 3 étoiles, tout en maintenant un lien texte standard et visible en bas de page ("Publier directement sur Google") pour assurer une conformité légale intégrale.
+Charte de la Langue Française (Loi 96)
+L'ensemble des interfaces utilisateurs, des formulaires de collecte, des tableaux de bord et des documents PDF générés sont conçus nativement en français québécois. Une bascule linguistique vers l'anglais est disponible pour garantir la conformité tout en s'adaptant aux besoins des établissements bilingues.
+Protection des Renseignements Personnels (Loi 25 - Québec)
+* Minimalisme des données : Collecte restreinte aux informations nécessaires au traitement du suivi client (nom, courriel, téléphone, détail du retour).
+* Transparence : Présence d'une mention d'information claire sur le formulaire de retour privé expliquant l'utilisation des données.
+* Politique de Confidentialité : Accessible directement depuis les formulaires et le site principal.
+
+
+________________
+
+
+7. Feuille de Route sur 30 Jours
+[ Semaine 1 : Développement MVP ] ──► [ Semaine 2 : Lancement & Outreach ] ──► [ Semaine 3 : Acquisition & Vidéos ] ──► [ Semaine 4 : Rétention & Scale ]
+
+* Semaine 1 — Architecture et Déploiement du MVP
+   * Configuration de l'environnement de développement et de la base de données.
+   * Déploiement du moteur de génération PDF bilingue.
+   * Intégration des abonnements Stripe et de la gestion des accès par clé API.
+* Semaine 2 — Mise en Ligne & Prospecting Initial
+   * Activation du domaine principal et validation des tests de paiement.
+   * Lancement de la campagne de prospection ciblée (150 messages directs envoyés à des commerces montréalais).
+   * Traitement des premiers retours et ajustements de l'offre.
+* Semaine 3 — Acquisition Media & Conversion
+   * Publication des premières séries de vidéos démonstratives sur TikTok et Reels.
+   * Acquisition des 5 à 10 premiers clients payants.
+   * Collecte des premiers témoignages d'utilisateurs.
+* Semaine 4 — Rétention & Automatisation
+   * Consolidation des flux de distribution automatique des rapports mensuels.
+   * Mise en place des campagnes publicitaires ciblées sur les réseaux sociaux.
+   * Structuration de la base de connaissances client pour maintenir l'exploitation sans support manuel.

@@ -1,0 +1,42 @@
+{
+  "name": "reveq",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Kit Réputation Google SaaS - Plateforme Libre-Service pour Commerces Locaux au Québec",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "next": "^14.2.24",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "@supabase/supabase-js": "^2.48.1",
+    "@supabase/ssr": "^0.5.2",
+    "stripe": "^17.6.0",
+    "resend": "^4.1.2",
+    "zod": "^3.24.2",
+    "lucide-react": "^0.475.0",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.0.1",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.19",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@types/qrcode": "^1.5.5",
+    "typescript": "^5.7.3",
+    "tailwindcss": "^3.4.17",
+    "postcss": "^8.5.2",
+    "autoprefixer": "^10.4.20",
+    "vitest": "^3.0.6",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "14.2.24"
+  }
+}

@@ -1,0 +1,46 @@
+import type { Dictionary } from "./fr";
+
+export const en: Dictionary = {
+  common: {
+    appName: "Google Reputation Kit",
+    tagline: "Self-Serve Platform for Local Businesses in Quebec",
+    loading: "Loading...",
+    error: "An error occurred",
+    save: "Save",
+    cancel: "Cancel",
+    send: "Send",
+  },
+  publicPage: {
+    question: "How was your experience today?",
+    positiveRedirecting: "Thank you so much! Redirecting you to Google to share your review...",
+    leaveReviewDirectly: "Post directly on Google",
+    privateFeedbackTitle: "Help us improve",
+    privateFeedbackSubtitle: "Your feedback will be delivered directly and confidentially to management.",
+    namePlaceholder: "Your name (optional)",
+    contactPlaceholder: "Email or phone number (optional)",
+    messagePlaceholder: "Please let us know what did not meet your expectations...",
+    submitFeedback: "Send to management",
+    feedbackSuccess: "Thank you for your honesty. Your message has been sent to management.",
+    serviceUnavailable: "This service is temporarily unavailable.",
+    law25Notice: "By submitting this form, you consent to your contact details being used solely to follow up on your visit, in accordance with Quebec Law 25.",
+  },
+  onboarding: {
+    title: "Set up your Reputation Kit in 3 minutes",
+    businessNameLabel: "Business Name",
+    slugLabel: "Unique Identifier (QR Code URL)",
+    googleUrlLabel: "Direct Google Maps Review Link",
+    googleUrlHelp: "Open your Google Business profile and click 'Ask for reviews' to copy your short link.",
+    emailLabel: "Email for private alerts",
+    submitButton: "Create my Kit and start 7-day free trial",
+  },
+  dashboard: {
+    overview: "Overview",
+    feedback: "Private Feedback",
+    kit: "Printable Kit",
+    settings: "Settings",
+    totalScans: "Total Scans",
+    googleRedirects: "5-Star Redirects",
+    privateIntercepts: "Private Intercepts",
+    averageRating: "Estimated Average Rating",
+  },
+};
