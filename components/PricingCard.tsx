@@ -2,140 +2,168 @@
 
 import React from "react";
 import Link from "next/link";
-import { Check, Sparkles, ArrowRight, ShieldCheck, Zap } from "lucide-react";
+import { Check, Sparkles, ArrowRight, ShieldCheck, X, Zap } from "lucide-react";
 import { Button } from "./ui/button";
 
 export function PricingCard() {
   return (
-    <div className="w-full max-w-4xl mx-auto py-12 px-4" id="tarifs">
-      <div className="text-center max-w-2xl mx-auto mb-10">
-        <span className="text-xs font-black uppercase tracking-wider text-brand px-3.5 py-1.5 bg-emerald-50 rounded-full border border-emerald-200">
-          Un seul tarif. Zéro complication.
+    <div className="w-full max-w-5xl mx-auto py-16 px-4" id="tarifs">
+      
+      {/* Eyebrow and Headline */}
+      <div className="text-center max-w-2xl mx-auto mb-12">
+        <span className="text-xs font-mono font-black uppercase tracking-widest text-brand px-3.5 py-1.5 rounded-full bg-brand/10 border border-brand/20">
+          TARIF UNIQUE · ZÉRO SURPRISE
         </span>
-        <h2 className="text-3xl sm:text-4xl font-black text-foreground mt-3 tracking-tight">
-          Un seul forfait tout inclus à 79 $ / mois.
+        <h2 className="text-3xl sm:text-5xl font-black text-white mt-4 tracking-tight leading-tight">
+          79 $ par mois. Tout inclus. <br className="hidden sm:inline" />
+          <span className="text-brand">Rentabilisé en 48 heures.</span>
         </h2>
-        <p className="text-sm text-slate-600 mt-2">
-          Tout ce dont votre commerce a besoin pour sécuriser sa note Google Maps et répondre à chaque client en 1 clic grâce à l&apos;IA.
+        <p className="text-sm text-slate-400 mt-3 leading-relaxed">
+          Pendant que les agences vous demandent 400 $ à 600 $/mois avec des contrats bloquants de 12 mois, REVEQ vous donne tous les outils en libre-service sans engagement.
         </p>
       </div>
 
-      {/* Single Bold Pricing Card */}
-      <div className="max-w-xl mx-auto rounded-3xl border-2 border-brand bg-white p-8 sm:p-10 shadow-xl relative overflow-hidden">
+      {/* Pricing Comparison Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch max-w-4xl mx-auto">
         
-        {/* Glow Accent */}
-        <div className="absolute top-0 right-0 -mr-16 -mt-16 w-48 h-48 rounded-full bg-brand/10 blur-3xl pointer-events-none" />
+        {/* Left: Traditional Agency / Podium */}
+        <div className="lg:col-span-5 rounded-3xl border border-white/10 bg-dark-900/60 p-7 flex flex-col justify-between text-left space-y-6 opacity-75">
+          <div className="space-y-3">
+            <div className="flex items-center justify-between text-xs font-mono text-slate-400">
+              <span className="uppercase font-bold">Solutions concurrentes</span>
+              <span>Podium / Birdeye</span>
+            </div>
+            <div className="flex items-baseline gap-1">
+              <span className="text-3xl font-extrabold text-slate-300">450 $</span>
+              <span className="text-xs text-slate-500 font-mono">CAD / mois</span>
+            </div>
+            <p className="text-xs text-slate-400">
+              Contrat annuel obligatoire de 5 400 $ CAD avec reconduction tacite et commercial agressif.
+            </p>
 
-        {/* Top Badge */}
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-1.5">
-            <span className="font-black text-xl text-foreground">REVEQ Intégral</span>
-            <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-md bg-brand text-white">
-              Tout Compris
-            </span>
+            <ul className="space-y-2.5 pt-3 text-xs text-slate-400">
+              <li className="flex items-center gap-2">
+                <X className="w-4 h-4 text-red-500 shrink-0" />
+                <span>Engagement 12 mois non résiliable</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <X className="w-4 h-4 text-red-500 shrink-0" />
+                <span>Aucune IA adaptée au français du Québec</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <X className="w-4 h-4 text-red-500 shrink-0" />
+                <span>Frais d&apos;installation initiaux (200 $ à 500 $)</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <X className="w-4 h-4 text-red-500 shrink-0" />
+                <span>Support basé aux États-Unis en anglais</span>
+              </li>
+            </ul>
           </div>
 
-          <div className="flex items-center gap-1 text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
-            <Sparkles className="w-3.5 h-3.5 text-brand" />
-            <span>IA Intégrée</span>
+          <div className="p-3 rounded-2xl bg-dark-850 border border-white/5 text-[11px] text-slate-400 font-mono text-center">
+            Total annuel : 5 400 $ + Taxes
           </div>
         </div>
 
-        <p className="text-xs text-slate-500 mb-6">
-          La formule complète sans restriction, sans options payantes cachées et sans engagement de durée.
-        </p>
-
-        {/* Price Display */}
-        <div className="flex items-baseline gap-2 pb-6 border-b border-slate-100">
-          <span className="text-5xl font-black text-foreground tracking-tight">
-            79 $
-          </span>
-          <div className="text-left">
-            <span className="text-xs font-extrabold text-slate-700 block">CAD / mois</span>
-            <span className="text-[11px] text-slate-400">Sans contrat d&apos;engagement</span>
+        {/* Right: REVEQ SINGLE HERO OFFER */}
+        <div className="lg:col-span-7 rounded-3xl border-2 border-brand bg-gradient-to-b from-dark-850 to-dark-900 p-8 sm:p-10 flex flex-col justify-between text-left shadow-glow relative overflow-hidden">
+          
+          <div className="absolute top-0 right-0 bg-brand text-black font-black text-[10px] uppercase font-mono tracking-widest px-4 py-1.5 rounded-bl-2xl">
+            FORFAIT UNIQUE SANS ENGAGEMENT
           </div>
-        </div>
 
-        {/* Features Checklist */}
-        <ul className="my-8 space-y-3.5 text-xs text-slate-700">
-          <li className="flex items-start gap-3">
-            <div className="w-5 h-5 rounded-full bg-brand text-white flex items-center justify-center shrink-0 mt-0.5">
-              <Sparkles className="w-3 h-3" />
-            </div>
+          <div className="space-y-6">
             <div>
-              <strong className="text-foreground">Générateur de Réponses Clients par IA :</strong> Rédigez en 1 clic des réponses adaptées selon le ton de votre choix (chaleureux, formel, geste commercial, explicatif).
+              <div className="flex items-center gap-2">
+                <h3 className="text-2xl font-black text-white">REVEQ Intégral</h3>
+                <span className="text-[10px] font-mono font-bold text-brand bg-brand/10 px-2 py-0.5 rounded-full border border-brand/20">
+                  TOUT COMPRIS
+                </span>
+              </div>
+              <p className="text-xs text-slate-400 mt-1">
+                La suite complète de réputation avec l&apos;assistant IA de réponse illimité.
+              </p>
             </div>
-          </li>
 
-          <li className="flex items-start gap-3">
-            <div className="w-5 h-5 rounded-full bg-brand text-white flex items-center justify-center shrink-0 mt-0.5">
-              <Check className="w-3 h-3 stroke-[3]" />
+            <div className="flex items-baseline gap-2 pb-5 border-b border-white/10">
+              <span className="text-5xl sm:text-6xl font-black text-white tracking-tight">
+                79 $
+              </span>
+              <div>
+                <span className="text-xs font-mono font-extrabold text-brand block uppercase">
+                  CAD / mois
+                </span>
+                <span className="text-[11px] text-slate-400">Sans engagement · Annulable en 1 clic</span>
+              </div>
             </div>
-            <div>
-              <strong className="text-foreground">Filtre Intelligent Anti-Avis Négatif :</strong> Les 4-5★ vont directement sur Google Maps, les 1-3★ sont interceptés confidentiellement.
-            </div>
-          </li>
 
-          <li className="flex items-start gap-3">
-            <div className="w-5 h-5 rounded-full bg-brand text-white flex items-center justify-center shrink-0 mt-0.5">
-              <Check className="w-3 h-3 stroke-[3]" />
-            </div>
-            <div>
-              <strong className="text-foreground">Kit d&apos;Impression PDF Haute Définition :</strong> Affiches de comptoir demi-lettre (5.5&quot; x 8.5&quot;) et planches d&apos;autocollants prêtes en 1 clic.
-            </div>
-          </li>
+            <ul className="space-y-3.5 text-xs text-slate-200">
+              <li className="flex items-start gap-2.5">
+                <div className="w-4 h-4 rounded-full bg-brand text-black flex items-center justify-center shrink-0 mt-0.5 font-black text-[10px]">
+                  ✓
+                </div>
+                <div>
+                  <strong className="text-white">Assistant IA de réponse aux clients en illimité :</strong> Rédige en 1 seconde la réponse parfaite selon 4 tonalités prêtes à envoyer.
+                </div>
+              </li>
 
-          <li className="flex items-start gap-3">
-            <div className="w-5 h-5 rounded-full bg-brand text-white flex items-center justify-center shrink-0 mt-0.5">
-              <Check className="w-3 h-3 stroke-[3]" />
-            </div>
-            <div>
-              <strong className="text-foreground">Mode Borne Tablette de Caisse :</strong> Interface continue pour iPad posé en caisse enregistreuse avec réinitialisation automatique.
-            </div>
-          </li>
+              <li className="flex items-start gap-2.5">
+                <div className="w-4 h-4 rounded-full bg-brand text-black flex items-center justify-center shrink-0 mt-0.5 font-black text-[10px]">
+                  ✓
+                </div>
+                <div>
+                  <strong className="text-white">Filtre anti-avis négatif :</strong> Les 4-5★ vont sur Google Maps, les 1-3★ restent confidentiels sur votre téléphone.
+                </div>
+              </li>
 
-          <li className="flex items-start gap-3">
-            <div className="w-5 h-5 rounded-full bg-brand text-white flex items-center justify-center shrink-0 mt-0.5">
-              <Check className="w-3 h-3 stroke-[3]" />
-            </div>
-            <div>
-              <strong className="text-foreground">Alertes d&apos;urgence & Bilan ROI mensuel :</strong> Notification immédiate par courriel et récapitulatif automatique des avis protégés.
-            </div>
-          </li>
+              <li className="flex items-start gap-2.5">
+                <div className="w-4 h-4 rounded-full bg-brand text-black flex items-center justify-center shrink-0 mt-0.5 font-black text-[10px]">
+                  ✓
+                </div>
+                <div>
+                  <strong className="text-white">Supports d&apos;impression PDF haute définition :</strong> Affiches comptoir 5.5&quot;x8.5&quot; demi-lettre et planches de stickers vectoriels.
+                </div>
+              </li>
 
-          <li className="flex items-start gap-3">
-            <div className="w-5 h-5 rounded-full bg-brand text-white flex items-center justify-center shrink-0 mt-0.5">
-              <Check className="w-3 h-3 stroke-[3]" />
-            </div>
-            <div>
-              <strong className="text-foreground">Volume 100 % Illimité :</strong> Zéro limite sur le nombre de scans, de retours ou de réponses IA générées.
-            </div>
-          </li>
-        </ul>
+              <li className="flex items-start gap-2.5">
+                <div className="w-4 h-4 rounded-full bg-brand text-black flex items-center justify-center shrink-0 mt-0.5 font-black text-[10px]">
+                  ✓
+                </div>
+                <div>
+                  <strong className="text-white">Mode Borne Tablette Caisse :</strong> Écran continu pour iPad au comptoir avec réinitialisation automatique.
+                </div>
+              </li>
 
-        {/* CTA Button */}
-        <div className="space-y-3 pt-2">
-          <Link href="/onboarding">
-            <Button
-              size="lg"
-              className="w-full text-sm font-extrabold py-4 shadow-lg bg-brand hover:bg-brand-hover text-white flex items-center justify-center gap-2"
-            >
-              <span>Démarrer 7 jours gratuits (79 $ / mois)</span>
-              <ArrowRight className="w-4 h-4" />
-            </Button>
-          </Link>
+              <li className="flex items-start gap-2.5">
+                <div className="w-4 h-4 rounded-full bg-brand text-black flex items-center justify-center shrink-0 mt-0.5 font-black text-[10px]">
+                  ✓
+                </div>
+                <div>
+                  <strong className="text-white">Alertes instantanées & Bilan mensuel ROI :</strong> Sachez exactement combien d&apos;avis 5★ ont été générés et combien de clients ont été sauvés.
+                </div>
+              </li>
+            </ul>
+          </div>
 
-          <p className="text-center text-[11px] text-slate-400 flex items-center justify-center gap-1.5">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-            Aucun prélèvement aujourd&apos;hui · Annulation en 1 clic sans condition
-          </p>
+          <div className="mt-8 space-y-3 pt-4 border-t border-white/10">
+            <Link href="/onboarding" className="block">
+              <Button size="lg" className="w-full text-base font-black py-4 shadow-glow">
+                Démarrer mes 7 jours d&apos;essai gratuit (79 $ / mois)
+                <ArrowRight className="w-4 h-4 ml-1" />
+              </Button>
+            </Link>
+
+            <p className="text-center text-[11px] text-slate-400 font-mono flex items-center justify-center gap-1.5">
+              <ShieldCheck className="w-3.5 h-3.5 text-brand" />
+              0.00 $ aujourd&apos;hui · Aucun engagement · Annulation instantanée
+            </p>
+          </div>
+
         </div>
 
       </div>
 
-      <div className="text-center mt-6 text-xs text-slate-400">
-        Pas de contrat d&apos;un an contraignant à 400 $/mois comme chez Podium ou Birdeye.
-      </div>
     </div>
   );
 }

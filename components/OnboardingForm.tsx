@@ -30,7 +30,7 @@ export function OnboardingForm() {
   const [isSlugEditedManually, setIsSlugEditedManually] = useState(false);
   const [googleUrl, setGoogleUrl] = useState("");
   const [alertEmail, setAlertEmail] = useState("");
-  const [primaryColor, setPrimaryColor] = useState("#059669");
+  const [primaryColor, setPrimaryColor] = useState("#00F59B");
   const [language, setLanguage] = useState<"FR" | "EN" | "BOTH">("FR");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [completedSlug, setCompletedSlug] = useState<string | null>(null);
@@ -99,7 +99,6 @@ export function OnboardingForm() {
     setIsSubmitting(true);
 
     try {
-      // Simulation / enregistrement local
       await new Promise((resolve) => setTimeout(resolve, 800));
       setCompletedSlug(slug);
     } catch {
@@ -111,29 +110,29 @@ export function OnboardingForm() {
 
   if (completedSlug) {
     return (
-      <div className="max-w-lg mx-auto bg-white p-8 rounded-3xl border border-border shadow-xl text-center space-y-6 animate-in fade-in zoom-in-95 duration-200">
-        <div className="w-16 h-16 mx-auto rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center">
+      <div className="max-w-lg mx-auto bg-dark-850 p-8 sm:p-10 rounded-3xl border border-white/10 shadow-2xl text-center space-y-6 animate-in fade-in zoom-in-95 duration-200">
+        <div className="w-16 h-16 mx-auto rounded-full bg-brand/10 text-brand border border-brand/20 flex items-center justify-center shadow-glow-sm">
           <CheckCircle2 className="w-9 h-9" />
         </div>
 
         <div className="space-y-2">
-          <h2 className="text-2xl font-black text-foreground">
-            Félicitations ! Votre REVEQ est prêt.
+          <h2 className="text-2xl sm:text-3xl font-black text-white">
+            Félicitations ! Votre REVEQ est actif.
           </h2>
-          <p className="text-sm text-slate-600">
-            Votre QR Code dynamique et vos outils de réponse par IA sont configurés pour{" "}
-            <strong>{businessName}</strong>.
+          <p className="text-xs sm:text-sm text-slate-300">
+            Votre QR Code dynamique et votre assistant IA de réponse sont configurés pour{" "}
+            <strong className="text-white">{businessName}</strong>.
           </p>
         </div>
 
-        <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-left space-y-2">
-          <p className="text-xs text-slate-500 font-semibold uppercase">Lien dynamique de votre QR Code</p>
-          <div className="flex items-center justify-between bg-white px-3 py-2 rounded-lg border font-mono text-xs text-brand font-bold">
+        <div className="p-4 rounded-2xl bg-dark-900 border border-white/10 text-left space-y-2">
+          <p className="text-[11px] text-slate-400 font-mono uppercase font-bold">Lien dynamique de votre QR Code</p>
+          <div className="flex items-center justify-between bg-dark-950 px-3 py-2 rounded-xl border border-white/5 font-mono text-xs text-brand font-bold">
             <span>app.reveq.ca/{completedSlug}</span>
             <Link
               href={`/${completedSlug}`}
               target="_blank"
-              className="text-[11px] underline text-slate-600 hover:text-foreground"
+              className="text-[11px] underline text-slate-400 hover:text-white"
             >
               Tester
             </Link>
@@ -142,8 +141,8 @@ export function OnboardingForm() {
 
         <div className="space-y-3 pt-2">
           <Link href="/dashboard" className="block">
-            <Button size="lg" className="w-full font-bold bg-brand hover:bg-brand-hover text-white">
-              Accéder à mon Tableau de Bord
+            <Button size="lg" className="w-full font-black shadow-glow">
+              Accéder à mon Tableau de Bord REVEQ
               <ArrowRight className="w-4 h-4 ml-1" />
             </Button>
           </Link>
@@ -155,9 +154,9 @@ export function OnboardingForm() {
               setCompletedSlug(null);
               setStep(1);
             }}
-            className="text-xs text-slate-400"
+            className="text-xs text-slate-500 hover:text-slate-300 font-mono"
           >
-            Créer un autre commerce
+            Configurer un autre établissement
           </Button>
         </div>
       </div>
@@ -167,27 +166,27 @@ export function OnboardingForm() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start max-w-6xl mx-auto">
       {/* Left Column: Multi-Step Form */}
-      <div className="lg:col-span-7 bg-white p-6 sm:p-8 rounded-3xl border border-border shadow-sm">
+      <div className="lg:col-span-7 bg-dark-850 p-6 sm:p-9 rounded-3xl border border-white/10 shadow-2xl">
         
         {/* Step Indicator */}
-        <div className="flex items-center justify-between mb-8 pb-4 border-b border-slate-100">
+        <div className="flex items-center justify-between mb-8 pb-4 border-b border-white/5">
           <div className="flex items-center gap-2">
             {[1, 2, 3].map((s) => (
               <div
                 key={s}
-                className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs transition-colors ${
+                className={`w-8 h-8 rounded-full flex items-center justify-center font-black text-xs font-mono transition-colors ${
                   step === s
-                    ? "bg-brand text-white shadow-xs"
+                    ? "bg-brand text-black shadow-glow-sm"
                     : step > s
-                    ? "bg-emerald-100 text-emerald-700"
-                    : "bg-slate-100 text-slate-400"
+                    ? "bg-brand/20 text-brand border border-brand/30"
+                    : "bg-dark-900 text-slate-600 border border-white/5"
                 }`}
               >
                 {step > s ? "✓" : s}
               </div>
             ))}
           </div>
-          <span className="text-xs font-semibold text-slate-500">
+          <span className="text-xs font-mono font-bold text-slate-400">
             Étape {step} sur 3
           </span>
         </div>
@@ -198,112 +197,152 @@ export function OnboardingForm() {
           {step === 1 && (
             <div className="space-y-5 animate-in fade-in duration-150">
               <div className="space-y-1">
-                <h2 className="text-xl font-bold text-foreground flex items-center gap-2">
+                <h2 className="text-xl font-black text-white flex items-center gap-2">
                   <Building2 className="w-5 h-5 text-brand" />
                   Identité de votre établissement
                 </h2>
-                <p className="text-xs text-slate-500">
-                  Renseignez le nom de votre établissement tel qu&apos;il apparaît sur votre devanture.
+                <p className="text-xs text-slate-400">
+                  Renseignez le nom de votre commerce tel qu&apos;il apparaît sur votre devanture.
                 </p>
               </div>
 
-              <Input
-                label="Nom de l'établissement"
-                placeholder="ex: Café Le Petit Saint-Denis"
-                value={businessName}
-                onChange={handleNameChange}
-                error={errors.businessName}
-                required
-              />
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Input
-                  label="Ville ou Quartier"
-                  placeholder="ex: Montréal, QC"
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                />
-
-                <Input
-                  label="Identifiant URL (Slug)"
-                  placeholder="cafe-petit-saint-denis"
-                  value={slug}
-                  onChange={handleSlugChange}
-                  error={errors.slug}
-                  helperText="Utilisé pour générer l'adresse de votre QR Code."
+              <div>
+                <label className="block text-xs font-mono font-bold text-slate-300 uppercase tracking-wider mb-1.5">
+                  Nom de l&apos;établissement
+                </label>
+                <input
+                  type="text"
+                  placeholder="ex: Bistro Le Saint-Denis"
+                  value={businessName}
+                  onChange={handleNameChange}
+                  className="w-full px-4 py-3 rounded-xl border border-white/10 bg-dark-900 text-white placeholder:text-slate-600 text-sm focus:outline-none focus:border-brand"
                   required
                 />
+                {errors.businessName && (
+                  <p className="text-xs text-red-400 font-medium mt-1">{errors.businessName}</p>
+                )}
               </div>
 
-              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-600 space-y-1">
-                <span className="font-semibold block text-slate-700">Votre lien direct sera :</span>
-                <span className="font-mono text-brand font-bold block truncate">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-mono font-bold text-slate-300 uppercase tracking-wider mb-1.5">
+                    Ville ou Quartier
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="ex: Montréal, QC"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                    className="w-full px-4 py-3 rounded-xl border border-white/10 bg-dark-900 text-white placeholder:text-slate-600 text-sm focus:outline-none focus:border-brand"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-mono font-bold text-slate-300 uppercase tracking-wider mb-1.5">
+                    Identifiant URL (Slug)
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="bistro-saint-denis"
+                    value={slug}
+                    onChange={handleSlugChange}
+                    className="w-full px-4 py-3 rounded-xl border border-white/10 bg-dark-900 text-white placeholder:text-slate-600 text-sm font-mono focus:outline-none focus:border-brand"
+                    required
+                  />
+                  {errors.slug && (
+                    <p className="text-xs text-red-400 font-medium mt-1">{errors.slug}</p>
+                  )}
+                </div>
+              </div>
+
+              <div className="p-3.5 bg-dark-900 rounded-2xl border border-white/5 text-xs text-slate-400 space-y-1">
+                <span className="font-bold text-slate-300 block font-mono text-[11px]">VOTRE LIEN COURT DIRECT SERA :</span>
+                <span className="font-mono text-brand font-black block truncate text-sm">
                   https://app.reveq.ca/{slug || "votre-slug"}
                 </span>
               </div>
             </div>
           )}
 
-          {/* STEP 2 : GOOGLE REVIEWS & EMAIL */}
+          {/* STEP 2 : GOOGLE REVIEWS & ALERTE */}
           {step === 2 && (
             <div className="space-y-5 animate-in fade-in duration-150">
               <div className="space-y-1">
-                <h2 className="text-xl font-bold text-foreground flex items-center gap-2">
+                <h2 className="text-xl font-black text-white flex items-center gap-2">
                   <LinkIcon className="w-5 h-5 text-brand" />
                   Lien Google Reviews & Alertes
                 </h2>
-                <p className="text-xs text-slate-500">
-                  Où rediriger vos clients satisfaits et où envoyer les retours privés.
+                <p className="text-xs text-slate-400">
+                  Où rediriger les 5 étoiles et où recevoir les retours confidentiels.
                 </p>
               </div>
 
-              <Input
-                label="Lien direct d'avis Google Maps"
-                placeholder="https://g.page/r/CU9rQ4Zexample/review"
-                value={googleUrl}
-                onChange={(e) => setGoogleUrl(e.target.value)}
-                error={errors.googleUrl}
-                helperText="Ouvrez votre profil Google Business et cliquez sur 'Demander des avis' pour copier le lien court."
-                required
-              />
+              <div>
+                <label className="block text-xs font-mono font-bold text-slate-300 uppercase tracking-wider mb-1.5">
+                  Lien direct d&apos;avis Google Maps
+                </label>
+                <input
+                  type="url"
+                  placeholder="https://g.page/r/CU9rQ4Zexample/review"
+                  value={googleUrl}
+                  onChange={(e) => setGoogleUrl(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-white/10 bg-dark-900 text-white placeholder:text-slate-600 text-sm focus:outline-none focus:border-brand"
+                  required
+                />
+                {errors.googleUrl && (
+                  <p className="text-xs text-red-400 font-medium mt-1">{errors.googleUrl}</p>
+                )}
+                <p className="text-[11px] text-slate-500 mt-1">
+                  Ouvrez votre profil d&apos;établissement Google et cliquez sur &ldquo;Demander des avis&rdquo; pour copier le lien court.
+                </p>
+              </div>
 
-              <Input
-                type="email"
-                label="Courriel de réception des alertes d'urgence"
-                placeholder="direction@votre-commerce.ca"
-                value={alertEmail}
-                onChange={(e) => setAlertEmail(e.target.value)}
-                error={errors.alertEmail}
-                helperText="Vous recevrez immédiatement une notification confidentielle en cas de retour 1-3 étoiles."
-                required
-              />
+              <div>
+                <label className="block text-xs font-mono font-bold text-slate-300 uppercase tracking-wider mb-1.5">
+                  Courriel d&apos;alerte instantanée
+                </label>
+                <input
+                  type="email"
+                  placeholder="gerant@votre-commerce.ca"
+                  value={alertEmail}
+                  onChange={(e) => setAlertEmail(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-white/10 bg-dark-900 text-white placeholder:text-slate-600 text-sm focus:outline-none focus:border-brand"
+                  required
+                />
+                {errors.alertEmail && (
+                  <p className="text-xs text-red-400 font-medium mt-1">{errors.alertEmail}</p>
+                )}
+                <p className="text-[11px] text-slate-500 mt-1">
+                  Vous recevrez immédiatement chaque mécontentement pour y répondre avec l&apos;IA.
+                </p>
+              </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-semibold text-foreground mb-1.5">
+                  <label className="block text-xs font-mono font-bold text-slate-300 uppercase tracking-wider mb-1.5">
                     Couleur de marque
                   </label>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-3">
                     <input
                       type="color"
                       value={primaryColor}
                       onChange={(e) => setPrimaryColor(e.target.value)}
-                      className="w-10 h-10 rounded-lg border border-border cursor-pointer p-0.5"
+                      className="w-10 h-10 rounded-xl border border-white/10 cursor-pointer p-0.5 bg-dark-900"
                     />
-                    <span className="font-mono text-xs text-slate-600 font-medium">
+                    <span className="font-mono text-xs text-brand font-black">
                       {primaryColor}
                     </span>
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-foreground mb-1.5">
+                  <label className="block text-xs font-mono font-bold text-slate-300 uppercase tracking-wider mb-1.5">
                     Langue par défaut
                   </label>
                   <select
                     value={language}
                     onChange={(e) => setLanguage(e.target.value as "FR" | "EN" | "BOTH")}
-                    className="w-full px-3 py-2 rounded-lg border border-border text-sm focus:outline-none focus:ring-2 focus:ring-brand/20 bg-white"
+                    className="w-full px-4 py-3 rounded-xl border border-white/10 text-xs font-bold focus:outline-none focus:border-brand bg-dark-900 text-white"
                   >
                     <option value="FR">Français (Loi 96 Québec)</option>
                     <option value="EN">English</option>
@@ -314,73 +353,72 @@ export function OnboardingForm() {
             </div>
           )}
 
-          {/* STEP 3 : FORFAIT UNIQUE 79 $ & CONFIRMATION */}
+          {/* STEP 3 : FORFAIT UNIQUE 79 $ */}
           {step === 3 && (
             <div className="space-y-5 animate-in fade-in duration-150">
               <div className="space-y-1">
-                <h2 className="text-xl font-bold text-foreground flex items-center gap-2">
+                <h2 className="text-xl font-black text-white flex items-center gap-2">
                   <Sparkles className="w-5 h-5 text-brand" />
                   Forfait REVEQ Tout Inclus (79 $ / mois)
                 </h2>
-                <p className="text-xs text-slate-500">
-                  Une formule unique et complète sans frais caché, avec 7 jours d&apos;essai gratuit.
+                <p className="text-xs text-slate-400">
+                  Formule complète sans frais d&apos;installation, avec 7 jours d&apos;essai gratuit.
                 </p>
               </div>
 
-              {/* Single Comprehensive Plan Card */}
-              <div className="p-5 rounded-2xl border-2 border-brand bg-emerald-50/30 space-y-3">
-                <div className="flex items-center justify-between pb-3 border-b border-emerald-100">
+              {/* Comprehensive Dark Card */}
+              <div className="p-6 rounded-3xl border-2 border-brand bg-gradient-to-b from-dark-900 to-dark-950 space-y-4 shadow-glow-sm">
+                <div className="flex items-center justify-between pb-4 border-b border-white/10">
                   <div>
-                    <h3 className="font-black text-lg text-foreground">Abonnement REVEQ Intégral</h3>
-                    <p className="text-xs text-slate-500">Tout compris avec réponses clients par IA illimitées</p>
+                    <h3 className="font-black text-lg text-white">REVEQ Intégral</h3>
+                    <p className="text-xs text-slate-400">Tout inclus avec réponses clients par IA illimitées</p>
                   </div>
                   <div className="text-right">
-                    <span className="text-2xl font-black text-foreground">79 $</span>
-                    <span className="text-xs text-slate-500 block">CAD / mois</span>
+                    <span className="text-3xl font-black text-white">79 $</span>
+                    <span className="text-xs font-mono text-brand block uppercase font-bold">CAD / mois</span>
                   </div>
                 </div>
 
-                <ul className="space-y-2 text-xs text-slate-700">
-                  <li className="flex items-center gap-2">
+                <ul className="space-y-2.5 text-xs text-slate-300">
+                  <li className="flex items-center gap-2.5">
                     <Check className="w-4 h-4 text-brand shrink-0" />
-                    <span><strong>Générateur de réponses clients par IA inclus</strong> (4 tonalités)</span>
+                    <span><strong>Générateur de réponses IA illimité</strong> (4 tonalités prêtes à envoyer)</span>
                   </li>
-                  <li className="flex items-center gap-2">
+                  <li className="flex items-center gap-2.5">
                     <Check className="w-4 h-4 text-brand shrink-0" />
-                    <span>Filtre d&apos;avis Google 5★ & interception privée 1-3★</span>
+                    <span>Filtre d&apos;avis 5★ vers Google Maps & interception privée 1-3★</span>
                   </li>
-                  <li className="flex items-center gap-2">
+                  <li className="flex items-center gap-2.5">
                     <Check className="w-4 h-4 text-brand shrink-0" />
-                    <span>Générateur PDF d&apos;affiches comptoir et autocollants vectoriels HD</span>
+                    <span>Affiches de comptoir PDF demi-lettre et planches d&apos;autocollants HD</span>
                   </li>
-                  <li className="flex items-center gap-2">
+                  <li className="flex items-center gap-2.5">
                     <Check className="w-4 h-4 text-brand shrink-0" />
-                    <span>Mode Borne caisse tablette (/kiosk/[slug])</span>
+                    <span>Mode Borne caisse tablette en continu (/kiosk/[slug])</span>
                   </li>
-                  <li className="flex items-center gap-2">
+                  <li className="flex items-center gap-2.5">
                     <Check className="w-4 h-4 text-brand shrink-0" />
                     <span>Alertes courriel instantanées & Bilan mensuel ROI</span>
                   </li>
                 </ul>
               </div>
 
-              {/* Summary guarantees */}
-              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 space-y-2">
-                <div className="flex items-center gap-2 text-foreground font-semibold">
-                  <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span>Essai Gratuit de 7 Jours Sans Risque</span>
+              <div className="p-4 rounded-2xl bg-dark-900 border border-white/5 text-xs text-slate-400 space-y-1.5">
+                <div className="flex items-center gap-2 text-white font-bold">
+                  <ShieldCheck className="w-4 h-4 text-brand shrink-0" />
+                  <span>Essai Gratuit 7 Jours Sans Risque</span>
                 </div>
-                <ul className="space-y-1 text-[11px] text-slate-600 pl-6 list-disc">
-                  <li>Aucun prélèvement aujourd&apos;hui (0.00 $ CAD).</li>
-                  <li>Accès immédiat à votre lien QR Code, affiches et assistant IA.</li>
-                  <li>Annulation en 1 clic sans condition depuis votre espace client.</li>
+                <ul className="space-y-1 text-[11px] text-slate-400 pl-6 list-disc">
+                  <li>0.00 $ prélevé aujourd&apos;hui.</li>
+                  <li>Accès immédiat à vos affiches, QR Codes et assistant IA.</li>
+                  <li>Annulation en 1 clic sans condition à tout moment.</li>
                 </ul>
               </div>
             </div>
           )}
 
-          {/* Form Actions (Buttons) */}
-          <div className="flex items-center justify-between pt-6 border-t border-slate-100">
+          {/* Form Actions */}
+          <div className="flex items-center justify-between pt-6 border-t border-white/10">
             {step > 1 ? (
               <Button
                 type="button"
@@ -388,20 +426,21 @@ export function OnboardingForm() {
                 size="md"
                 onClick={prevStep}
                 disabled={isSubmitting}
+                className="text-xs font-mono"
               >
                 <ArrowLeft className="w-4 h-4 mr-1" />
                 Précédent
               </Button>
             ) : (
               <Link href="/">
-                <Button type="button" variant="ghost" size="md">
+                <Button type="button" variant="ghost" size="md" className="text-xs font-mono">
                   Annuler
                 </Button>
               </Link>
             )}
 
             {step < 3 ? (
-              <Button type="button" size="md" onClick={nextStep} className="font-bold bg-brand hover:bg-brand-hover text-white">
+              <Button type="button" size="md" onClick={nextStep} className="font-black text-xs">
                 Étape suivante
                 <ArrowRight className="w-4 h-4 ml-1" />
               </Button>
@@ -410,9 +449,9 @@ export function OnboardingForm() {
                 type="submit"
                 size="md"
                 disabled={isSubmitting}
-                className="font-bold shadow-md bg-brand hover:bg-brand-hover text-white"
+                className="font-black shadow-glow text-xs"
               >
-                {isSubmitting ? "Activation en cours..." : "Démarrer mes 7 jours gratuits (79 $ / mois)"}
+                {isSubmitting ? "Activation..." : "Démarrer mes 7 jours gratuits (79 $ / mois)"}
                 <ArrowRight className="w-4 h-4 ml-1" />
               </Button>
             )}

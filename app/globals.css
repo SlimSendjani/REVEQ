@@ -7,8 +7,23 @@
 }
 
 body {
-  color: #0F172A;
-  background: #FFFFFF;
+  color: #F8FAFC;
+  background-color: #090D16;
   font-family: var(--font-inter);
   -webkit-font-smoothing: antialiased;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #090D16;
+}
+::-webkit-scrollbar-thumb {
+  background: #1E293B;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
 }

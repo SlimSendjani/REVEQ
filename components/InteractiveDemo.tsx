@@ -10,195 +10,191 @@ import {
   Sparkles,
   Copy,
   Check,
-  ArrowRight,
-  MessageSquare,
+  Send,
+  Zap,
 } from "lucide-react";
 import { Button } from "./ui/button";
 import { generateCustomerResponse, RESPONSE_TONES, type ResponseTone } from "@/lib/ai-responder";
 
 export function InteractiveDemo() {
-  const [rating, setRating] = useState<number | null>(2); // Default to 2 stars to immediately showcase the new AI feature!
+  const [rating, setRating] = useState<number | null>(2);
   const [hoverRating, setHoverRating] = useState<number | null>(null);
-  const [tone, setTone] = useState<ResponseTone>("chaleureux");
+  const [tone, setTone] = useState<ResponseTone>("rabais");
   const [copied, setCopied] = useState(false);
 
-  const sampleComplaint = "Le temps d'attente pour le café était de plus de 15 minutes ce matin malgré peu de monde...";
-
-  const reset = () => {
-    setRating(null);
-    setHoverRating(null);
-  };
+  const sampleComplaint = "On a attendu plus de 25 minutes pour nos cafés et nos croissants ce matin. C'était tiède et personne ne s'est excusé.";
 
   const activeRating = hoverRating || rating || 0;
 
-  // Génération dynamique de la réponse IA selon le ton sélectionné
-  const aiGeneratedReply = generateCustomerResponse({
-    businessName: "Café Le Petit Saint-Denis",
-    customerName: "Alexandre",
+  const aiReply = generateCustomerResponse({
+    businessName: "Café & Bistro Le Saint-Laurent",
+    customerName: "Marc-Antoine",
     rating: rating || 2,
     message: sampleComplaint,
     tone,
   });
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(aiGeneratedReply);
+    navigator.clipboard.writeText(aiReply);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
   return (
-    <div className="flex flex-col lg:flex-row items-center justify-center gap-8 w-full max-w-5xl mx-auto my-6">
+    <div className="flex flex-col lg:flex-row items-center justify-center gap-8 w-full max-w-5xl mx-auto my-4">
       
-      {/* 1. Smartphone Frame */}
-      <div className="relative w-full max-w-[310px] aspect-[9/19] bg-slate-900 rounded-[44px] p-3.5 shadow-2xl ring-1 ring-slate-800 shrink-0">
-        {/* Dynamic Island */}
-        <div className="absolute top-5 left-1/2 -translate-x-1/2 w-24 h-4 bg-slate-950 rounded-full z-20 flex items-center justify-center">
+      {/* 1. Realistic Smartphone Chassis (Dark Luxury Frame) */}
+      <div className="relative w-full max-w-[320px] aspect-[9/18.8] bg-black rounded-[46px] p-3 shadow-2xl ring-1 ring-white/10 shrink-0">
+        
+        {/* Dynamic Island Speaker */}
+        <div className="absolute top-5 left-1/2 -translate-x-1/2 w-24 h-4 bg-dark-950 rounded-full z-20 flex items-center justify-center">
           <div className="w-2.5 h-2.5 rounded-full bg-slate-800" />
         </div>
 
-        {/* Screen Content */}
-        <div className="relative h-full w-full bg-white rounded-[34px] overflow-hidden flex flex-col justify-between pt-8 pb-4 px-4 text-center select-none shadow-inner border border-slate-100">
+        {/* Screen */}
+        <div className="relative h-full w-full bg-dark-950 rounded-[36px] overflow-hidden flex flex-col justify-between pt-8 pb-4 px-4 text-center select-none border border-white/5">
           
-          {/* Logo & Identity */}
-          <div>
-            <div className="w-13 h-13 mx-auto rounded-2xl bg-emerald-50 text-brand flex items-center justify-center font-bold text-2xl shadow-xs border border-emerald-100">
+          {/* Business Header */}
+          <div className="pt-2">
+            <div className="w-12 h-12 mx-auto rounded-2xl bg-dark-850 border border-white/10 flex items-center justify-center text-brand font-black text-xl shadow-inner">
               ☕
             </div>
-            <h3 className="mt-2.5 text-sm font-extrabold text-foreground">
-              Café Le Petit Saint-Denis
+            <h3 className="mt-2 text-sm font-black text-white tracking-tight">
+              Bistro Le Saint-Laurent
             </h3>
-            <p className="text-[10px] text-slate-400 font-medium">Plateau Mont-Royal · Montréal</p>
+            <p className="text-[10px] text-slate-400 font-mono">Boul. Saint-Laurent · Montréal</p>
           </div>
 
-          {/* Interactive Screen Center */}
+          {/* Central Interactive Zone */}
           <div className="my-auto py-2">
             {rating === null ? (
               <div className="space-y-4">
-                <p className="text-xs font-bold text-foreground px-2">
-                  Comment s&apos;est déroulée votre visite aujourd&apos;hui ?
+                <p className="text-xs font-bold text-white px-2">
+                  Comment s&apos;est déroulée votre expérience aujourd&apos;hui ?
                 </p>
 
                 {/* Stars */}
                 <div className="flex items-center justify-center gap-1.5 py-1">
-                  {[1, 2, 3, 4, 5].map((star) => (
+                  {[1, 2, 3, 4, 5].map((s) => (
                     <button
-                      key={star}
+                      key={s}
                       type="button"
-                      onMouseEnter={() => setHoverRating(star)}
+                      onMouseEnter={() => setHoverRating(s)}
                       onMouseLeave={() => setHoverRating(null)}
-                      onClick={() => setRating(star)}
+                      onClick={() => setRating(s)}
                       className="p-1 transition-transform hover:scale-125 focus:outline-none cursor-pointer"
-                      aria-label={`${star} étoiles`}
+                      aria-label={`${s} étoiles`}
                     >
                       <Star
                         className={`w-7 h-7 transition-colors ${
-                          star <= activeRating
-                            ? "fill-star text-star drop-shadow-sm"
-                            : "text-slate-300 fill-slate-50"
+                          s <= activeRating
+                            ? "fill-star text-star drop-shadow-md"
+                            : "text-slate-700 fill-slate-800"
                         }`}
                       />
                     </button>
                   ))}
                 </div>
 
-                <p className="text-[10px] text-slate-400">
-                  Touchez les étoiles pour tester le comportement
+                <p className="text-[10px] text-slate-500 font-mono">
+                  Touchez une note pour tester l&apos;aiguillage
                 </p>
               </div>
             ) : rating >= 4 ? (
               /* POSITIVE ROUTE (4-5 Stars) -> Google Maps */
-              <div className="space-y-3 bg-emerald-50/90 p-3.5 rounded-2xl border border-emerald-200 animate-in fade-in zoom-in-95 duration-150">
-                <div className="w-9 h-9 mx-auto rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center">
-                  <CheckCircle2 className="w-5 h-5" />
+              <div className="space-y-3 bg-brand/10 p-4 rounded-2xl border border-brand/30 animate-in fade-in zoom-in-95 duration-150">
+                <div className="w-10 h-10 mx-auto rounded-full bg-brand text-black flex items-center justify-center font-black shadow-glow">
+                  <CheckCircle2 className="w-6 h-6" />
                 </div>
                 <div className="space-y-1">
-                  <span className="text-xs font-black text-emerald-950 block">
-                    Expérience {rating}★ Détectée !
+                  <span className="text-xs font-black text-brand block uppercase tracking-wider">
+                    {rating} Étoiles Détectées
                   </span>
-                  <p className="text-[10px] text-emerald-800 leading-relaxed">
-                    Redirection instantanée vers votre fiche Google Maps...
+                  <p className="text-[11px] text-white leading-relaxed font-medium">
+                    Redirection automatique vers Google Maps en cours...
                   </p>
                 </div>
-                <div className="p-2 bg-white rounded-xl border border-emerald-100 shadow-2xs text-left text-[10px]">
-                  <div className="flex items-center justify-between font-bold text-slate-700">
-                    <span>Google Reviews</span>
+                <div className="p-2.5 bg-dark-900 rounded-xl border border-white/10 text-left text-[10px]">
+                  <div className="flex items-center justify-between font-bold text-white">
+                    <span>Fiche Google Maps</span>
                     <span className="text-star">★★★★★</span>
                   </div>
-                  <p className="text-slate-500 truncate">Avis 5 étoiles publié publiquement</p>
+                  <p className="text-slate-400 truncate">Avis 5★ public qui fait monter votre note</p>
                 </div>
               </div>
             ) : (
-              /* PRIVATE INTERCEPTION (1-3 Stars) */
-              <div className="space-y-2 bg-amber-50/90 p-3 rounded-2xl border border-amber-200 text-left animate-in fade-in zoom-in-95 duration-150">
-                <div className="flex items-center gap-1.5 text-amber-900 font-extrabold text-[11px]">
-                  <ShieldAlert className="w-3.5 h-3.5 text-amber-600 shrink-0" />
-                  <span>Insatisfaction {rating}★ interceptée en privé</span>
+              /* INTERCEPTION ROUTE (1-3 Stars) */
+              <div className="space-y-2.5 bg-amber-500/10 p-3.5 rounded-2xl border border-amber-500/30 text-left animate-in fade-in zoom-in-95 duration-150">
+                <div className="flex items-center gap-1.5 text-amber-400 font-black text-[11px] uppercase tracking-wider">
+                  <ShieldAlert className="w-3.5 h-3.5 shrink-0" />
+                  <span>Insatisfaction {rating}★ interceptée</span>
                 </div>
-                <p className="text-[10px] text-amber-800 leading-tight">
-                  Ce retour parvient au gérant SANS impacter votre note Google Maps :
+                <p className="text-[10px] text-slate-300 leading-tight">
+                  Ce retour parvient au gérant en privé. <strong>Zéro publication sur Google Maps.</strong>
                 </p>
-                <div className="text-[10px] p-2 rounded-lg border border-amber-200 bg-white text-slate-700 italic">
+                <div className="text-[10px] p-2 rounded-xl border border-amber-500/20 bg-dark-900/90 text-slate-300 italic">
                   &ldquo;{sampleComplaint}&rdquo;
                 </div>
-                <div className="text-[9px] text-emerald-700 font-bold bg-emerald-100/60 p-1.5 rounded-md flex items-center gap-1">
-                  <Sparkles className="w-3 h-3 text-emerald-700 shrink-0" />
-                  <span>L&apos;IA a rédigé votre réponse en direct →</span>
+                <div className="text-[10px] text-brand font-bold bg-brand/10 p-1.5 rounded-lg border border-brand/20 flex items-center gap-1.5">
+                  <Sparkles className="w-3 h-3 text-brand shrink-0" />
+                  <span>Réponse IA déjà générée à droite →</span>
                 </div>
               </div>
             )}
           </div>
 
-          {/* Footer note inside phone & Google compliance */}
-          <div className="pt-2 border-t border-slate-100">
+          {/* Footer note & Google compliance */}
+          <div className="pt-2 border-t border-white/5">
             {rating !== null && rating <= 3 && (
-              <p className="text-[9px] text-slate-400 hover:underline cursor-pointer flex items-center justify-center gap-1 mb-1">
+              <p className="text-[9px] text-slate-500 hover:text-slate-300 underline cursor-pointer flex items-center justify-center gap-1 mb-1 font-mono">
                 Laisser un avis directement sur Google
                 <ExternalLink className="w-2.5 h-2.5" />
               </p>
             )}
-            <p className="text-[9px] text-slate-400 font-medium">
-              Conformité Loi 96 · Directives Google
+            <p className="text-[9px] text-slate-500 font-mono">
+              Conformité Loi 96 Québec · Règlements Google
             </p>
           </div>
+
         </div>
       </div>
 
-      {/* 2. Side Showcase Card : REVEQ AI RESPONDER */}
-      <div className="flex-1 max-w-xl text-left bg-white p-6 sm:p-7 rounded-3xl border border-border shadow-lg space-y-5">
+      {/* 2. Side Control Panel : REVEQ AI RESPONSE GENERATOR */}
+      <div className="flex-1 max-w-xl text-left bg-dark-850 p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl space-y-6">
         
-        {/* Top Feature Tag */}
+        {/* Top Header Badge */}
         <div className="flex items-center justify-between flex-wrap gap-2">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-black border border-emerald-200">
-            <Sparkles className="w-3.5 h-3.5 text-brand" />
-            Nouveau dans REVEQ : Réponses Clients par IA
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand/10 text-brand text-xs font-mono font-black border border-brand/20">
+            <Sparkles className="w-3.5 h-3.5" />
+            ASSISTANT IA REVEQ (79 $ / MOIS)
           </div>
 
           {rating !== null && (
             <button
               type="button"
-              onClick={reset}
-              className="text-xs text-slate-400 hover:text-foreground flex items-center gap-1 transition"
+              onClick={() => setRating(null)}
+              className="text-xs font-mono text-slate-400 hover:text-white flex items-center gap-1 transition"
             >
               <RotateCcw className="w-3 h-3" />
-              Changer de note
+              Recommencer
             </button>
           )}
         </div>
 
-        {/* Headline */}
+        {/* Commercial Hook */}
         <div>
-          <h3 className="text-xl sm:text-2xl font-black text-foreground tracking-tight">
-            Ne perdez plus 20 minutes à rédiger vos réponses.
+          <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight leading-snug">
+            Désamorcez les mécontents en 10 secondes.
           </h3>
-          <p className="text-xs sm:text-sm text-slate-600 mt-1">
-            Choisissez simplement le ton souhaité. L&apos;IA de REVEQ génère immédiatement une réponse diplomatique, humaine et prête à envoyer.
+          <p className="text-xs sm:text-sm text-slate-400 mt-2 leading-relaxed">
+            Ne perdez plus 25 minutes à peser chaque mot après votre shift. Choisissez le ton souhaité, l&apos;IA rédige la réponse parfaite en français d&apos;ici pour rattraper le client avant qu&apos;il ne parte chez votre concurrent.
           </p>
         </div>
 
         {/* Tone Selector Pills */}
         <div className="space-y-2">
-          <label className="block text-xs font-bold text-foreground uppercase tracking-wider">
-            1. Choisissez le type de réponse :
+          <label className="block text-[11px] font-mono font-extrabold uppercase tracking-widest text-slate-400">
+            Étape 1 · Sélectionnez le ton de votre réponse :
           </label>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {RESPONSE_TONES.map((t) => (
@@ -208,43 +204,42 @@ export function InteractiveDemo() {
                 onClick={() => setTone(t.id)}
                 className={`p-2.5 rounded-xl text-xs font-bold transition flex flex-col items-center justify-center gap-1 border cursor-pointer ${
                   tone === t.id
-                    ? "bg-brand text-white border-brand shadow-sm scale-102"
-                    : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100"
+                    ? "bg-brand text-black border-brand font-black shadow-glow-sm"
+                    : "bg-dark-900 text-slate-300 border-white/5 hover:border-slate-700 hover:bg-dark-800"
                 }`}
               >
-                <span className="text-base">{t.emoji}</span>
-                <span className="text-[11px] leading-tight text-center">{t.label}</span>
+                <span className="text-sm font-black">{t.emoji}</span>
+                <span className="text-[10px] text-center leading-tight">{t.label}</span>
               </button>
             ))}
           </div>
         </div>
 
-        {/* Live Generated AI Output */}
+        {/* Live Generated Output */}
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <label className="text-xs font-bold text-foreground uppercase tracking-wider flex items-center gap-1.5">
-              <MessageSquare className="w-3.5 h-3.5 text-brand" />
-              <span>2. Réponse rédigée en 1 seconde par l&apos;IA :</span>
+            <label className="text-[11px] font-mono font-extrabold uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
+              <span>Étape 2 · Réponse prête à expédier :</span>
             </label>
-            <span className="text-[10px] text-slate-400 font-mono">Modèle REVEQ-AI</span>
+            <span className="text-[10px] text-brand font-mono">100% Personnalisée</span>
           </div>
 
           <div className="relative">
             <textarea
               readOnly
               rows={6}
-              value={aiGeneratedReply}
-              className="w-full text-xs p-3.5 rounded-2xl border border-slate-200 bg-slate-50/80 text-slate-800 font-sans leading-relaxed resize-none focus:outline-none"
+              value={aiReply}
+              className="w-full text-xs p-4 rounded-2xl border border-white/10 bg-dark-900 text-slate-200 font-sans leading-relaxed resize-none focus:outline-none focus:border-brand"
             />
           </div>
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex items-center justify-between pt-1">
+        {/* Direct Action */}
+        <div className="flex items-center justify-between flex-wrap gap-3 pt-1 border-t border-white/5">
           <Button
-            size="sm"
+            size="md"
             onClick={handleCopy}
-            className="text-xs font-bold bg-brand hover:bg-brand-hover text-white shadow-xs"
+            className="text-xs font-black shadow-glow"
           >
             {copied ? (
               <>
@@ -259,8 +254,8 @@ export function InteractiveDemo() {
             )}
           </Button>
 
-          <span className="text-[11px] text-slate-500 font-semibold">
-            Inclus dans le Forfait Unique 79 $ / mois
+          <span className="text-xs text-slate-400 font-mono">
+            Rentabilisé dès la 1ère table sauvée
           </span>
         </div>
 
