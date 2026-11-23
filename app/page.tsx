@@ -10,71 +10,102 @@ import { ArrowRight, Check, ShieldCheck, HelpCircle } from "lucide-react";
 
 export default function HomePage() {
   return (
-    <div className="flex min-h-screen flex-col bg-white text-slate-900 font-sans selection:bg-[#0e7470]/20 selection:text-[#0e7470]">
+    <div className="flex min-h-screen flex-col bg-[#f4f7fc] text-slate-900 font-sans selection:bg-[#0e636a]/20 selection:text-[#0e636a] relative overflow-x-hidden">
+      
+      {/* 35px Reference Grid Background with downward fade */}
+      <div 
+        className="absolute inset-0 pointer-events-none z-0"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+            linear-gradient(to bottom, #e2e8f0 1px, transparent 1px)
+          `,
+          backgroundSize: "35px 35px",
+          maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 45%, rgba(0,0,0,0.15) 75%, rgba(0,0,0,0) 100%)",
+          WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 45%, rgba(0,0,0,0.15) 75%, rgba(0,0,0,0) 100%)",
+        }}
+      />
+
+      {/* Background Soft Glow Auras matching exact sampled colors */}
+      {/* Left aura: Teal/cyan #48b1b6 */}
+      <div 
+        className="absolute top-[340px] left-[2%] sm:left-[8%] w-[420px] h-[360px] rounded-full pointer-events-none z-0"
+        style={{
+          background: "#48b1b6",
+          filter: "blur(110px)",
+          opacity: 0.35,
+        }}
+      />
+      {/* Right aura: Slate-indigo #7c8ba1 */}
+      <div 
+        className="absolute top-[360px] right-[2%] sm:right-[8%] w-[440px] h-[380px] rounded-full pointer-events-none z-0"
+        style={{
+          background: "#7c8ba1",
+          filter: "blur(120px)",
+          opacity: 0.4,
+        }}
+      />
+
       {/* 1. TOP NAVBAR */}
       <Navbar />
 
       {/* 2. HERO SECTION */}
-      <section
-        className="relative overflow-hidden pt-10 pb-16 sm:pt-14 sm:pb-24 border-b border-slate-100"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, rgba(0,0,0,0.035) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.035) 1px, transparent 1px)",
-          backgroundSize: "36px 36px",
-        }}
-      >
-        <div className="max-w-6xl mx-auto px-4 relative z-10 text-center">
+      <section className="relative pt-6 pb-12 sm:pt-10 sm:pb-16 z-10">
+        <div className="max-w-5xl mx-auto px-4 text-center">
           
           {/* Top Pill Tag */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-slate-200/80 text-xs font-semibold text-slate-700 shadow-xs mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0e636a]/10 border border-[#0e636a]/20 text-[#0e636a] text-xs font-semibold shadow-2xs mb-5">
             <span>Sécuriser les commerces et restos d&apos;ici</span>
             <span>⚜️🍁</span>
           </div>
 
           {/* Main Headline H1 matching reference */}
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 leading-[1.12] max-w-4xl mx-auto">
+          <h1 className="text-3xl sm:text-5xl lg:text-[52px] font-black tracking-tight text-slate-900 leading-[1.14] max-w-3xl mx-auto">
             Ne laissez plus un seul{" "}
-            <span className="text-orange-600 font-black">
-              avis 1<span className="text-amber-500">★</span>
-            </span>{" "}
+            <span className="text-[#de4830] font-black">
+              avis 1<span className="text-[#faa71d]">★</span>
+            </span>
+            <br className="hidden sm:inline" />{" "}
             couler votre entreprise.
           </h1>
 
           {/* Subtitle matching reference */}
-          <p className="mt-5 text-sm sm:text-lg text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed">
-            La solution simple pour transformer vos clients satisfaits en avis 5<span className="text-amber-500">★</span> sur Google Maps et recevoir les critiques en privé, avant qu&apos;elles ne nuisent à votre réputation.
+          <p className="mt-4 text-sm sm:text-base lg:text-[17px] text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed">
+            La solution simple pour transformer vos clients satisfaits en avis 5<span className="text-[#faa71d]">★</span> sur Google Maps
+            <br className="hidden sm:inline" />
+            et recevoir les critiques en privé, avant qu&apos;elles ne nuisent à votre réputation.
           </p>
 
           {/* CTAs matching reference */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-8">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-6">
             <Link href="/onboarding" className="w-full sm:w-auto">
-              <button className="w-full sm:w-auto bg-[#0e7470] hover:bg-[#0c625f] text-white font-bold text-sm sm:text-base px-7 py-3.5 rounded-xl transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 hover:-translate-y-0.5">
+              <button className="w-full sm:w-auto bg-[#0e636a] hover:bg-[#0b5258] text-white font-bold text-sm sm:text-base px-6 py-3 rounded-lg transition-all shadow-sm hover:shadow flex items-center justify-center gap-2">
                 <span>Essai gratuit de 7 jours</span>
-                <ArrowRight className="w-4 h-4" />
+                <span>→</span>
               </button>
             </Link>
 
             <a href="#demo" className="w-full sm:w-auto">
-              <button className="w-full sm:w-auto bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 font-semibold text-sm sm:text-base px-6 py-3.5 rounded-xl transition-all shadow-xs hover:border-slate-300">
+              <button className="w-full sm:w-auto bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 font-semibold text-sm sm:text-base px-6 py-3 rounded-lg transition-all shadow-2xs hover:border-slate-400">
                 Voir la démo interactive
               </button>
             </a>
           </div>
 
           {/* Trust badges line */}
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs text-slate-500 font-medium">
-            <span className="inline-flex items-center gap-1 text-emerald-700 font-semibold">
-              <Check className="w-3.5 h-3.5" />
+          <div className="mt-3.5 flex flex-wrap items-center justify-center gap-2 text-xs text-slate-500 font-medium">
+            <span className="inline-flex items-center gap-1.5 text-slate-700 font-medium">
+              <span className="w-3.5 h-3.5 rounded-full bg-[#44a476] text-white flex items-center justify-center text-[9px] font-bold">✓</span>
               Sans carte de crédit
             </span>
-            <span>•</span>
+            <span className="text-slate-300">•</span>
             <span>Sans engagement</span>
-            <span>•</span>
+            <span className="text-slate-300">•</span>
             <span>Conforme Loi 96</span>
           </div>
 
           {/* 3. HERO VISUAL SHOWCASE (DUAL DESKTOP & SMARTPHONE MOCKUP) */}
-          <div className="mt-12 sm:mt-16">
+          <div className="mt-8 sm:mt-12">
             <HeroVisualShowcase />
           </div>
 
@@ -159,7 +190,7 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
             <span className="font-black text-slate-900 text-base">
-              REV<span className="text-[#0e7470]">EQ</span>
+              REVEQ
             </span>
             <span>· Conçu à Montréal, Québec · © 2026 REVEQ</span>
           </div>
@@ -173,11 +204,11 @@ export default function HomePage() {
               Confidentialité (Loi 25)
             </Link>
             <span>·</span>
-            <Link href="/login" className="text-[#0e7470] font-semibold hover:underline">
+            <Link href="/login" className="text-[#0e636a] font-semibold hover:underline">
               Connexion
             </Link>
             <span>·</span>
-            <Link href="/onboarding" className="text-[#0e7470] font-semibold hover:underline">
+            <Link href="/onboarding" className="text-[#0e636a] font-semibold hover:underline">
               Essai Gratuit 7 jours
             </Link>
           </div>

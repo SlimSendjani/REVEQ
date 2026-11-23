@@ -3,14 +3,24 @@
 @tailwind utilities;
 
 :root {
-  --font-inter: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 body {
-  color: #F8FAFC;
-  background-color: #090D16;
-  font-family: var(--font-inter);
+  color: #0f172a;
+  background-color: #f4f7fc;
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Reference grid pattern with 35px spacing */
+.bg-ref-grid {
+  background-color: #f4f7fc;
+  background-image: 
+    linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+    linear-gradient(to bottom, #e2e8f0 1px, transparent 1px);
+  background-size: 35px 35px;
 }
 
 /* Custom scrollbar */
@@ -18,12 +28,12 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #090D16;
+  background: #f4f7fc;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1E293B;
+  background: #cbd5e1;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #94a3b8;
 }

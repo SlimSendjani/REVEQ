@@ -10,7 +10,7 @@ export function PricingSection() {
       <div className="max-w-5xl mx-auto px-4 text-center">
         
         {/* Badge */}
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0e7470]/10 text-[#0e7470] text-xs font-bold mb-4">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0e636a]/10 text-[#0e636a] text-xs font-bold mb-4">
           <Sparkles className="w-3.5 h-3.5" />
           <span>Tarification Simple &amp; Transparente</span>
         </div>
@@ -23,10 +23,10 @@ export function PricingSection() {
         </p>
 
         {/* The 79$ Card */}
-        <div className="mt-12 max-w-lg mx-auto bg-white border-2 border-[#0e7470] rounded-3xl p-8 sm:p-10 shadow-xl relative text-left">
+        <div className="mt-12 max-w-lg mx-auto bg-white border-2 border-[#0e636a] rounded-3xl p-8 sm:p-10 shadow-xl relative text-left">
           
           {/* Top floating pill */}
-          <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#0e7470] text-white text-xs font-bold tracking-wide uppercase shadow-sm">
+          <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#0e636a] text-white text-xs font-bold tracking-wide uppercase shadow-sm">
             Offre de Lancement Québec
           </div>
 
@@ -44,37 +44,37 @@ export function PricingSection() {
           {/* Feature List */}
           <ul className="space-y-3.5 text-xs sm:text-sm text-slate-700 mb-8">
             <li className="flex items-center gap-3">
-              <span className="w-5 h-5 rounded-full bg-[#0e7470]/10 text-[#0e7470] flex items-center justify-center shrink-0">
+              <span className="w-5 h-5 rounded-full bg-[#0e636a]/10 text-[#0e636a] flex items-center justify-center shrink-0">
                 <Check className="w-3.5 h-3.5" />
               </span>
               <span><strong>Aiguillage intelligent :</strong> 5★ vers Google Maps, 1-3★ en privé</span>
             </li>
             <li className="flex items-center gap-3">
-              <span className="w-5 h-5 rounded-full bg-[#0e7470]/10 text-[#0e7470] flex items-center justify-center shrink-0">
+              <span className="w-5 h-5 rounded-full bg-[#0e636a]/10 text-[#0e636a] flex items-center justify-center shrink-0">
                 <Check className="w-3.5 h-3.5" />
               </span>
               <span><strong>Générateur IA de riposte client</strong> (4 tonalités au choix)</span>
             </li>
             <li className="flex items-center gap-3">
-              <span className="w-5 h-5 rounded-full bg-[#0e7470]/10 text-[#0e7470] flex items-center justify-center shrink-0">
+              <span className="w-5 h-5 rounded-full bg-[#0e636a]/10 text-[#0e636a] flex items-center justify-center shrink-0">
                 <Check className="w-3.5 h-3.5" />
               </span>
               <span><strong>Kit d&apos;impression PDF HD :</strong> Chevalets de table &amp; présentoirs comptoir</span>
             </li>
             <li className="flex items-center gap-3">
-              <span className="w-5 h-5 rounded-full bg-[#0e7470]/10 text-[#0e7470] flex items-center justify-center shrink-0">
+              <span className="w-5 h-5 rounded-full bg-[#0e636a]/10 text-[#0e636a] flex items-center justify-center shrink-0">
                 <Check className="w-3.5 h-3.5" />
               </span>
               <span><strong>Alertes courriel instantanées</strong> à chaque avis critique</span>
             </li>
             <li className="flex items-center gap-3">
-              <span className="w-5 h-5 rounded-full bg-[#0e7470]/10 text-[#0e7470] flex items-center justify-center shrink-0">
+              <span className="w-5 h-5 rounded-full bg-[#0e636a]/10 text-[#0e636a] flex items-center justify-center shrink-0">
                 <Check className="w-3.5 h-3.5" />
               </span>
               <span><strong>Rapport mensuel de ROI</strong> et statistiques de scans en direct</span>
             </li>
             <li className="flex items-center gap-3">
-              <span className="w-5 h-5 rounded-full bg-[#0e7470]/10 text-[#0e7470] flex items-center justify-center shrink-0">
+              <span className="w-5 h-5 rounded-full bg-[#0e636a]/10 text-[#0e636a] flex items-center justify-center shrink-0">
                 <Check className="w-3.5 h-3.5" />
               </span>
               <span><strong>100 % conforme :</strong> Loi 96, Loi 25 et directives Google</span>
@@ -82,7 +82,7 @@ export function PricingSection() {
           </ul>
 
           <Link href="/onboarding" className="block">
-            <button className="w-full py-4 px-6 rounded-2xl bg-[#0e7470] hover:bg-[#0c625f] text-white font-bold text-base transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2">
+            <button className="w-full py-4 px-6 rounded-2xl bg-[#0e636a] hover:bg-[#0b5258] text-white font-bold text-base transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2">
               <span>Démarrer mes 7 jours gratuits</span>
               <ArrowRight className="w-4 h-4" />
             </button>
