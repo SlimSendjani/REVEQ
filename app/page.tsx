@@ -1,8 +1,10 @@
 import React from "react";
 import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
+import { LiveIncidentTicker } from "@/components/LiveIncidentTicker";
 import { InteractiveDemo } from "@/components/InteractiveDemo";
-import { PricingCard } from "@/components/PricingCard";
+import { FinancialBleedCalculator } from "@/components/FinancialBleedCalculator";
+import { TacticalDossier } from "@/components/TacticalDossier";
 import { Button } from "@/components/ui/button";
 import {
   ShieldCheck,
@@ -11,326 +13,298 @@ import {
   FileText,
   Tablet,
   CheckCircle2,
-  XCircle,
   HelpCircle,
   Sparkles,
-  TrendingUp,
-  AlertTriangle,
   Zap,
+  Terminal,
+  Printer,
+  ChevronDown,
 } from "lucide-react";
 
 export default function HomePage() {
   return (
-    <div className="flex min-h-screen flex-col bg-dark-950 text-white selection:bg-brand selection:text-black">
+    <div className="flex min-h-screen flex-col bg-[#070A11] text-white selection:bg-brand selection:text-black">
       <Navbar />
 
-      {/* HERO SECTION */}
-      <section className="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28 border-b border-white/5 bg-gradient-to-b from-dark-950 via-dark-900 to-dark-950">
+      {/* 1. LIVE INCIDENT RADAR TICKER */}
+      <LiveIncidentTicker />
+
+      {/* 2. HERO SECTION - ASYMMETRIC TACTICAL EDITORIAL */}
+      <section className="relative overflow-hidden pt-12 pb-16 lg:pt-16 lg:pb-24 border-b border-white/5">
         
-        {/* Glow ambient background effects */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-brand/10 blur-[130px] rounded-full pointer-events-none" />
+        {/* Subtle radial ambient glows */}
+        <div className="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-brand/10 blur-[150px] rounded-full pointer-events-none" />
+        <div className="absolute bottom-0 right-1/4 w-[400px] h-[250px] bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none" />
 
-        <div className="max-w-6xl mx-auto px-4 flex flex-col items-center text-center relative z-10">
+        <div className="max-w-6xl mx-auto px-4 relative z-10">
           
-          {/* Eyebrow */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand/10 text-brand text-xs font-mono font-black mb-6 border border-brand/20 shadow-glow-sm">
-            <Sparkles className="w-4 h-4 text-brand" />
-            <span>COMMERCES DU QUÉBEC · RÉPUTATION & RÉPONSES IA AUTOMATISÉES</span>
+          <div className="max-w-4xl mx-auto text-center space-y-6">
+            
+            {/* Operational Status Pill */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand/10 text-brand text-xs font-mono font-black border border-brand/20 shadow-glow-sm">
+              <span className="w-2 h-2 rounded-full bg-brand animate-ping" />
+              <span>BOUCLIER DE RÉPUTATION QUÉBEC · LOI 96 & DIRECTIVES GOOGLE</span>
+            </div>
+
+            {/* Aggressive Direct Headline */}
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.06]">
+              Le vendredi soir à 21h30, la cuisine déborde.{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand via-emerald-300 to-white">
+                Un seul avis 1★ ne devrait pas détruire 5 ans d&apos;efforts.
+              </span>
+            </h1>
+
+            {/* Authentic Merchant Storytelling */}
+            <p className="text-base sm:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-normal">
+              Vos habitués ravis sont aiguillés vers votre Google 5★ en 3 secondes. Les insatisfactions ? Elles atterrissent sur votre cellulaire en privé. Et notre IA formule la réponse idéale en 15 secondes pour rattraper le client avant qu&apos;il ne parte chez votre concurrent.
+            </p>
+
+            {/* Forfait Pill */}
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-2xl bg-black/60 border border-white/10 text-xs font-mono text-slate-300">
+              <span>⚡ Forfait unique sans engagement : <strong className="text-white">79 $ CAD / mois</strong></span>
+              <span>·</span>
+              <span className="text-brand font-bold">Essai sans risque de 7 jours</span>
+            </div>
+
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+              <Link href="/onboarding" className="w-full sm:w-auto">
+                <Button size="lg" className="w-full sm:w-auto text-base font-black px-8 py-4 shadow-glow">
+                  Démarrer mes 7 jours gratuits (79 $ / mois)
+                  <ArrowRight className="w-5 h-5 ml-1" />
+                </Button>
+              </Link>
+              
+              <a href="#simulateur" className="w-full sm:w-auto">
+                <Button variant="outline" size="lg" className="w-full sm:w-auto text-base font-bold px-6">
+                  Tester le simulateur &amp; l&apos;IA ↓
+                </Button>
+              </a>
+            </div>
+
+            <p className="text-xs text-slate-500 font-mono">
+              Aucun contrat de 12 mois · 0.00 $ aujourd&apos;hui · Résiliable en 1 clic
+            </p>
+
           </div>
 
-          {/* Main Direct Headline */}
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white max-w-4xl leading-[1.08]">
-            Arrêtez de laisser un seul client mécontent{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand via-emerald-400 to-white">
-              détruire des années d&apos;efforts
-            </span>{" "}
-            sur Google Maps.
-          </h1>
-
-          {/* Subtitle */}
-          <p className="mt-6 text-base sm:text-xl text-slate-300 max-w-2xl leading-relaxed font-normal">
-            REVEQ propulse vos clients satisfaits vers votre Google 5 étoiles en 3 secondes. Les insatisfactions ? Elles atterrissent sur votre cellulaire en privé. Et notre IA génère la réponse idéale en 1 clic pour désamorcer la crise.
-          </p>
-
-          {/* Value Badge */}
-          <div className="mt-5 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-dark-850 text-slate-300 text-xs font-mono border border-white/10">
-            <span>⚡ Un seul forfait tout inclus : <strong>79 $ CAD / mois</strong></span>
-            <span>·</span>
-            <span className="text-brand font-bold">Sans engagement</span>
-          </div>
-
-          {/* CTAs */}
-          <div className="mt-8 flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
-            <Link href="/onboarding" className="w-full sm:w-auto">
-              <Button size="lg" className="w-full sm:w-auto text-base font-black px-8 py-4 shadow-glow">
-                Démarrer mes 7 jours gratuits (79 $ / mois)
-                <ArrowRight className="w-5 h-5 ml-1" />
-              </Button>
-            </Link>
-            <a href="#simulateur" className="w-full sm:w-auto">
-              <Button variant="outline" size="lg" className="w-full sm:w-auto text-base font-bold px-6">
-                Tester le simulateur & l&apos;IA
-              </Button>
-            </a>
-          </div>
-
-          <p className="mt-3 text-xs text-slate-500 font-mono">
-            Prêt en 3 minutes · 0.00 $ aujourd&apos;hui · Annulable en 1 clic
-          </p>
-
-          {/* Interactive Mobile Simulator & Live AI Showcase */}
-          <div className="w-full mt-12" id="simulateur">
+          {/* 3. HARDWARE-STYLE INTERACTIVE TERMINAL T-1 DEMO */}
+          <div className="mt-14" id="simulateur">
             <InteractiveDemo />
           </div>
 
         </div>
       </section>
 
-      {/* THE FINANCIAL REALITY SECTION (LE CALCUL QUI FAIT MAL) */}
-      <section className="py-20 border-b border-white/5 bg-dark-900/60" id="probleme">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-16">
+      {/* 4. FINANCIAL BLEED SIMULATOR (CALCULATEUR DE PERTE FINANCIÈRE) */}
+      <section className="py-20 border-b border-white/5 bg-gradient-to-b from-[#070A11] via-[#090D16] to-[#070A11]" id="probleme">
+        <div className="max-w-6xl mx-auto px-4 text-center">
+          
+          <div className="max-w-3xl mx-auto mb-10">
             <span className="text-xs font-mono font-black uppercase tracking-widest text-amber-400 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20">
-              LE CALCUL FINANCIER QUE PEU DE COMMERÇANTS FONT
+              AUDIT FINANCIER DU LOCAL PACK GOOGLE
             </span>
             <h2 className="text-3xl sm:text-5xl font-black text-white mt-4 tracking-tight">
-              Combien vous coûte réellement un avis 1 étoile sur Google Maps ?
+              Combien vous coûte réellement un avis négatif non intercepté ?
             </h2>
             <p className="text-sm sm:text-base text-slate-400 mt-3 leading-relaxed">
-              Dans un quartier compétitif à Montréal, la différence entre 4.7★ et 4.2★ ne se joue qu&apos;à 3 ou 4 avis négatifs non interceptés.
+              Dans un quartier compétitif à Montréal, Québec ou Laval, la différence entre 4.7★ et 4.2★ ne se joue qu&apos;à 3 ou 4 avis 1 étoile. Testez l&apos;impact direct sur vos revenus ci-dessous :
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <div className="p-6 rounded-3xl bg-dark-850 border border-white/5 space-y-3 text-left">
-              <div className="text-3xl font-black text-red-400 font-mono">- 35 %</div>
-              <h3 className="font-bold text-sm text-white">Chute hors du Top 3 Google</h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                Quand votre note baisse sous 4.3★, Google Maps cesse de vous recommander dans le &ldquo;Local 3-Pack&rdquo; au profit du resto d&apos;en face.
-              </p>
-            </div>
+          <FinancialBleedCalculator />
 
-            <div className="p-6 rounded-3xl bg-dark-850 border border-white/5 space-y-3 text-left">
-              <div className="text-3xl font-black text-amber-400 font-mono">3 800 $</div>
-              <h3 className="font-bold text-sm text-white">Perte de chiffre mensuelle moyenne</h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                Selon les données de recherche locale, un seul avis 1 étoile sur la première page détourne jusqu&apos;à 30 clients potentiels par semaine.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-3xl bg-dark-850 border-2 border-brand space-y-3 text-left shadow-glow-sm">
-              <div className="text-3xl font-black text-brand font-mono">79 $ / mois</div>
-              <h3 className="font-bold text-sm text-white">L&apos;assurance totale avec REVEQ</h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Un seul client mécontent intercepté et rattrapé par mois rembourse votre abonnement pour toute l&apos;année.
-              </p>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* THE BEFORE / AFTER COMPARISON */}
-      <section className="py-20 border-b border-white/5 bg-dark-950">
+      {/* 5. DECLASSIFIED DOSSIER : REVEQ VS TRADITIONAL RACKET (PODIUM / BIRDEYE) */}
+      <section className="py-20 border-b border-white/5 bg-[#070A11]" id="tarifs">
+        <TacticalDossier />
+      </section>
+
+      {/* 6. PHYSICAL HARDWARE & DELIVERABLES (AFFICHEURS, AUTOCOLLANTS, BORNE) */}
+      <section className="py-20 border-b border-white/5 bg-gradient-to-b from-[#070A11] via-[#090D16] to-[#070A11]" id="comment-ca-marche">
         <div className="max-w-6xl mx-auto px-4">
+          
           <div className="text-center max-w-2xl mx-auto mb-14">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand/10 border border-brand/20 text-brand font-mono text-xs font-black uppercase mb-3">
+              <Printer className="w-3.5 h-3.5 text-brand" />
+              <span>SUPPORTS PHYSIQUES COMPRIS DANS L&apos;ABONNEMENT</span>
+            </div>
             <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
-              Le piège du code QR ordinaire vs la stratégie REVEQ
+              Votre kit physique prêt à imprimer pour le comptoir
             </h2>
-            <p className="text-sm text-slate-400 mt-2">
-              Le QR Code au comptoir peut être votre meilleure arme... ou votre pire ennemi.
+            <p className="text-sm text-slate-400 mt-2 leading-relaxed">
+              Aucune attente de livraison postale. Tout est généré instantanément en PDF vectoriel haute définition dans votre tableau de bord.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {/* The Old Dangerous Way */}
-            <div className="p-8 rounded-3xl border border-red-500/20 bg-red-950/20 space-y-5 text-left">
-              <div className="flex items-center gap-2 text-red-400 font-black text-lg">
-                <XCircle className="w-6 h-6 text-red-400" />
-                <h3>Le code QR Google gratuit classique</h3>
-              </div>
-              <ul className="space-y-3 text-xs sm:text-sm text-slate-300">
-                <li className="flex items-start gap-2.5">
-                  <span className="text-red-400 font-bold shrink-0">✕</span>
-                  <span>Vous tendez le bâton pour vous faire battre : les clients mécontents cliquent et atterrissent directement sur Google Maps.</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <span className="text-red-400 font-bold shrink-0">✕</span>
-                  <span>Zéro seconde de répit : vous découvrez le problème une fois l&apos;avis 1 étoile affiché aux yeux de toute la ville.</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <span className="text-red-400 font-bold shrink-0">✕</span>
-                  <span>Aucun moyen de désamorcer le conflit avant la publication.</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* The REVEQ Strategic Way */}
-            <div className="p-8 rounded-3xl border-2 border-brand bg-dark-850 space-y-5 text-left shadow-glow-sm">
-              <div className="flex items-center gap-2 text-brand font-black text-lg">
-                <CheckCircle2 className="w-6 h-6 text-brand" />
-                <h3>Le filtre intelligent REVEQ (79 $ / mois)</h3>
-              </div>
-              <ul className="space-y-3 text-xs sm:text-sm text-slate-200">
-                <li className="flex items-start gap-2.5">
-                  <span className="text-brand font-bold shrink-0">✓</span>
-                  <span><strong>Vous contrôlez l&apos;aiguillage :</strong> Les 4-5★ vont sur Google Maps, les 1-3★ atterrissent sur votre téléphone en privé.</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <span className="text-brand font-bold shrink-0">✓</span>
-                  <span><strong>Le client se défoule en direct :</strong> Il vide son sac dans votre formulaire privé au lieu de détruire votre fiche publique.</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <span className="text-brand font-bold shrink-0">✓</span>
-                  <span><strong>L&apos;IA génère votre réponse :</strong> Offrez un café ou un rabais en 1 clic pour transformer un mécontent en client fidèle.</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3 PHYSICAL DELIVERABLES INCLUDED */}
-      <section className="py-20 border-b border-white/5 bg-dark-900/40" id="comment-ca-marche">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-xs font-mono font-black uppercase tracking-widest text-brand px-3.5 py-1.5 rounded-full bg-brand/10 border border-brand/20">
-              PRÊT EN 3 MINUTES
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-black text-white mt-3 tracking-tight">
-              Tout le matériel prêt à imprimer pour votre comptoir
-            </h2>
-            <p className="text-sm text-slate-400 mt-2">
-              Aucune attente postale. Tout est généré instantanément dans votre tableau de bord.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            <div className="p-7 rounded-3xl bg-dark-850 border border-white/5 space-y-4 text-left">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto font-mono">
+            
+            {/* Spec 1: Affiches Demi-Lettre */}
+            <div className="p-7 rounded-3xl bg-black/60 border border-white/10 space-y-4 text-left relative overflow-hidden group hover:border-brand/40 transition">
+              <div className="text-[10px] text-brand uppercase font-bold tracking-widest">SPEC-01 · COMPTOIR</div>
               <div className="w-12 h-12 rounded-2xl bg-brand/10 border border-brand/20 text-brand flex items-center justify-center font-black">
                 <FileText className="w-6 h-6" />
               </div>
-              <h3 className="text-base font-black text-white">
-                Affiches de Comptoir Demi-Lettre
+              <h3 className="text-base font-black text-white font-sans">
+                Affiches Demi-Lettre (5.5&quot; x 8.5&quot;)
               </h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                Format standard québécois (5.5&quot; x 8.5&quot;) prêt pour les présentoirs en plexiglas sur votre comptoir de caisse avec votre logo et vos couleurs.
+              <p className="text-xs text-slate-400 font-sans leading-relaxed">
+                Format standard des présentoirs de caisse en plexiglas. Inclut votre logo, vos couleurs d&apos;établissement et le QR code de protection dynamique.
               </p>
+              <div className="text-[10px] text-slate-500 pt-2 border-t border-white/5">
+                Prêt pour imprimante locale ou de bureau
+              </div>
             </div>
 
-            <div className="p-7 rounded-3xl bg-dark-850 border border-white/5 space-y-4 text-left">
+            {/* Spec 2: Autocollants Tables */}
+            <div className="p-7 rounded-3xl bg-black/60 border border-white/10 space-y-4 text-left relative overflow-hidden group hover:border-brand/40 transition">
+              <div className="text-[10px] text-brand uppercase font-bold tracking-widest">SPEC-02 · TABLES & MIROIRS</div>
               <div className="w-12 h-12 rounded-2xl bg-brand/10 border border-brand/20 text-brand flex items-center justify-center font-black">
                 <QrCode className="w-6 h-6" />
               </div>
-              <h3 className="text-base font-black text-white">
-                Planches d&apos;Autocollants & Tables
+              <h3 className="text-base font-black text-white font-sans">
+                Planches d&apos;Autocollants Tables
               </h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                6 autocollants haute définition par page pour tables de restaurant, miroirs de salon ou comptoirs de prise de commande.
+              <p className="text-xs text-slate-400 font-sans leading-relaxed">
+                6 autocollants par planche, parfaits pour les coins de table de restaurant, miroirs de salon de coiffure ou comptoirs de commande à emporter.
               </p>
+              <div className="text-[10px] text-slate-500 pt-2 border-t border-white/5">
+                Format vectoriel ultra-net 300 DPI
+              </div>
             </div>
 
-            <div className="p-7 rounded-3xl bg-dark-850 border border-white/5 space-y-4 text-left">
+            {/* Spec 3: Mode Borne Tablette */}
+            <div className="p-7 rounded-3xl bg-black/60 border border-white/10 space-y-4 text-left relative overflow-hidden group hover:border-brand/40 transition">
+              <div className="text-[10px] text-brand uppercase font-bold tracking-widest">SPEC-03 · MODE BORNE CAISSE</div>
               <div className="w-12 h-12 rounded-2xl bg-brand/10 border border-brand/20 text-brand flex items-center justify-center font-black">
                 <Tablet className="w-6 h-6" />
               </div>
-              <h3 className="text-base font-black text-white">
-                Mode Borne Plein Écran pour Tablette
+              <h3 className="text-base font-black text-white font-sans">
+                Kiosk Plein Écran pour iPad / Tablette
               </h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
-                Ouvrez la borne sur votre iPad de caisse. Écran continu sans veille qui se réinitialise automatiquement 10 secondes après chaque client.
+              <p className="text-xs text-slate-400 font-sans leading-relaxed">
+                Ouvrez simplement l&apos;URL kiosk sur votre iPad de comptoir. Écran sans mise en veille qui se réinitialise automatiquement 10 secondes après chaque client.
               </p>
+              <div className="text-[10px] text-slate-500 pt-2 border-t border-white/5">
+                Zéro matériel supplémentaire à acheter
+              </div>
             </div>
+
           </div>
+
         </div>
       </section>
 
-      {/* PRICING SECTION */}
-      <section className="py-14 bg-dark-950" id="tarifs">
-        <PricingCard />
-      </section>
-
-      {/* FAQ SECTION */}
-      <section className="py-16 border-t border-white/5 bg-dark-900/60" id="faq">
+      {/* 7. FREQUENTLY ASKED QUESTIONS */}
+      <section className="py-20 border-b border-white/5 bg-[#070A11]" id="faq">
         <div className="max-w-4xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-black text-white tracking-tight">
+          
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <span className="text-xs font-mono font-black uppercase tracking-widest text-brand px-3.5 py-1.5 rounded-full bg-brand/10 border border-brand/20">
+              TRANSPARENCE TOTALE
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-black text-white mt-4 tracking-tight">
               Questions Fréquentes
             </h2>
           </div>
 
-          <div className="space-y-4 text-left">
-            <div className="p-6 rounded-3xl bg-dark-850 border border-white/5 space-y-2">
-              <h3 className="text-sm font-bold text-white flex items-center gap-2">
-                <HelpCircle className="w-4 h-4 text-brand shrink-0" />
-                Comment l&apos;IA m&apos;aide-t-elle à répondre aux clients ?
+          <div className="space-y-4">
+            
+            <div className="p-6 rounded-2xl bg-black/60 border border-white/10 text-left space-y-2">
+              <h3 className="font-bold text-base text-white">
+                Comment l&apos;IA de REVEQ m&apos;aide-t-elle à répondre aux clients mécontents ?
               </h3>
-              <p className="text-xs text-slate-400 leading-relaxed pl-6">
-                Quand une insatisfaction arrive dans votre tableau de bord, vous cliquez sur &ldquo;Répondre avec l&apos;IA&rdquo;. Vous choisissez simplement l&apos;intention (Chaleureux, Institutionnel, Geste commercial avec rabais ou Explicatif du rush) et l&apos;IA formule en 1 seconde un message courtois et humain prêt à envoyer par courriel.
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Quand une insatisfaction arrive sur votre cellulaire, vous ouvrez votre tableau de bord et cliquez sur &ldquo;Répondre avec l&apos;IA&rdquo;. Vous sélectionnez simplement l&apos;intention souhaitée (Geste commercial avec rabais, Contexte du rush, Chaleureux ou Diplomatique) et l&apos;IA formule en 1 seconde un message courtois et humain rédigé en français d&apos;ici prêt à envoyer par courriel ou SMS en un clic.
               </p>
             </div>
 
-            <div className="p-6 rounded-3xl bg-dark-850 border border-white/5 space-y-2">
-              <h3 className="text-sm font-bold text-white flex items-center gap-2">
-                <HelpCircle className="w-4 h-4 text-brand shrink-0" />
-                Est-ce conforme aux conditions de Google ?
+            <div className="p-6 rounded-2xl bg-black/60 border border-white/10 text-left space-y-2">
+              <h3 className="font-bold text-base text-white">
+                Est-ce conforme aux directives officielles de Google (&ldquo;Review Gating&rdquo;) ?
               </h3>
-              <p className="text-xs text-slate-400 leading-relaxed pl-6">
-                <strong>Oui, à 100 %.</strong> Pour respecter scrupuleusement la politique anti-gating de Google, notre page d&apos;interception affiche toujours en bas un lien discret &ldquo;Publier directement sur Google&rdquo;. Le client est libre de cliquer, mais 95 % préfèrent régler le problème directement avec la direction via le formulaire privé.
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Oui, à 100 %. Pour respecter scrupuleusement les conditions de Google, notre page d&apos;interception affiche toujours en bas un lien discret &ldquo;Publier directement sur Google&rdquo;. Le client est libre de cliquer, mais 95 % préfèrent régler le problème directement avec la direction via le formulaire privé. Vous êtes 100 % conforme.
               </p>
             </div>
 
-            <div className="p-6 rounded-3xl bg-dark-850 border border-white/5 space-y-2">
-              <h3 className="text-sm font-bold text-white flex items-center gap-2">
-                <HelpCircle className="w-4 h-4 text-brand shrink-0" />
+            <div className="p-6 rounded-2xl bg-black/60 border border-white/10 text-left space-y-2">
+              <h3 className="font-bold text-base text-white">
                 Y a-t-il un engagement ou des frais cachés ?
               </h3>
-              <p className="text-xs text-slate-400 leading-relaxed pl-6">
-                Aucun engagement, aucun contrat de 12 mois comme chez Podium. Le forfait est de 79 $ CAD / mois tout inclus. Vous pouvez résilier en un clic à tout moment depuis votre tableau de bord.
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Aucun engagement, aucun contrat de 12 mois forcé comme chez Podium. Le forfait est de 79 $ CAD / mois tout inclus. Vous pouvez annuler en 1 clic à tout moment depuis votre tableau de bord.
               </p>
             </div>
+
+            <div className="p-6 rounded-2xl bg-black/60 border border-white/10 text-left space-y-2">
+              <h3 className="font-bold text-base text-white">
+                Comment respectez-vous la Loi 96 et la Loi 25 au Québec ?
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Toutes nos interfaces, kits imprimables et formulaires sont rédigés nativement en français de qualité. Une bascule bilingue est disponible pour les zones touristiques. Les données personnelles respectent la Loi 25 (protection des renseignements personnels, aucune revente de données).
+              </p>
+            </div>
+
           </div>
+
         </div>
       </section>
 
-      {/* FINAL VENDEUR CTA BANNER */}
-      <section className="py-20 border-t border-white/10 bg-gradient-to-b from-dark-900 to-dark-950 text-center relative overflow-hidden">
-        <div className="max-w-4xl mx-auto px-4 space-y-6 relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand/10 text-brand text-xs font-mono font-bold border border-brand/20">
-            <Zap className="w-3.5 h-3.5" />
-            7 JOURS D&apos;ESSAI GRATUIT SANS ENGAGEMENT
+      {/* 8. FINAL HIGH-CONVERTING CLOSING CALL-TO-ACTION */}
+      <section className="py-20 bg-gradient-to-b from-[#070A11] via-[#090D16] to-black text-center relative overflow-hidden">
+        
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-brand/15 blur-[140px] rounded-full pointer-events-none" />
+
+        <div className="max-w-4xl mx-auto px-4 relative z-10 space-y-6">
+          
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand/10 border border-brand/20 text-brand font-mono text-xs font-bold uppercase">
+            <span>7 JOURS D&apos;ESSAI GRATUIT · SANS RISQUE</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
             Reprenez le contrôle de votre note Google Maps dès aujourd&apos;hui.
           </h2>
 
-          <p className="text-base text-slate-400 max-w-xl mx-auto">
-            Rejoignez les commerces locaux du Québec qui protègent leur chiffre d&apos;affaires avec REVEQ pour 79 $ / mois.
+          <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+            Activez REVEQ pour 79 $ / mois. Vos supports de comptoir prêts en 3 minutes. Vos clients mécontents interceptés dès ce soir.
           </p>
 
           <div className="pt-2">
             <Link href="/onboarding">
-              <Button size="lg" className="text-base font-black px-10 py-4 shadow-glow">
-                Créer mon REVEQ Gratuitement
-                <ArrowRight className="w-5 h-5 ml-1" />
+              <Button size="lg" className="text-base font-black px-10 py-5 shadow-glow">
+                Créer mon REVEQ Gratuitement →
               </Button>
             </Link>
           </div>
+
+          <p className="text-xs text-slate-500 font-mono">
+            Aucun prélèvement aujourd&apos;hui · Résiliable en 1 clic
+          </p>
+
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t border-white/5 py-8 text-center text-xs text-slate-500 bg-dark-950">
-        <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono">
+      <footer className="border-t border-white/5 py-8 bg-black text-center text-xs text-slate-500 font-mono">
+        <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <span className="font-black text-white text-sm tracking-tight">
-              REV<span className="text-brand">EQ</span>
-            </span>
-            <span>· Conçu à Montréal, Québec</span>
+            <span className="font-black text-white text-sm">REV<span className="text-brand">EQ</span></span>
+            <span>· Conçu à Montréal, Québec · © 2026 REVEQ</span>
           </div>
-          <p>© 2026 REVEQ · Conforme Loi 96 & Loi 25 (Québec)</p>
+
+          <div className="flex items-center gap-4 text-[11px] text-slate-400">
+            <span>Conforme Loi 96 &amp; Loi 25 (Québec)</span>
+            <span>·</span>
+            <Link href="/onboarding" className="text-brand hover:underline">
+              Forfait Unique 79 $ / mois
+            </Link>
+          </div>
         </div>
       </footer>
+
     </div>
   );
 }
