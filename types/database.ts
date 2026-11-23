@@ -58,6 +58,7 @@ export type Database = {
           plan_tier?: "standard" | "pro" | "enterprise";
           created_at?: string;
         };
+        Relationships: [];
       };
       scan_events: {
         Row: {
@@ -81,6 +82,7 @@ export type Database = {
           routed_to?: "google" | "private";
           created_at?: string;
         };
+        Relationships: [];
       };
       private_feedbacks: {
         Row: {
@@ -113,6 +115,7 @@ export type Database = {
           status?: "new" | "resolved";
           created_at?: string;
         };
+        Relationships: [];
       };
     };
     Views: Record<string, never>;
