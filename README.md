@@ -19,24 +19,38 @@ SaaS en libre-service 100 % numérique pour commerces de proximité au Québec (
 
 ---
 
-## 2. Déploiement en Production (Vercel)
+## 2. Déploiement en Production (Cloudflare)
 
-Ce dépôt est prêt pour un déploiement instantané sur [Vercel](https://vercel.com) :
+L'application est déployée sur **Cloudflare** via l'adaptateur OpenNext & Cloudflare Workers :
 
-1. Connectez votre compte GitHub à Vercel et importez le dépôt **`SlimSendjani/REVEQ`**.
-2. Configurez les variables d'environnement listées dans `.env.example` :
-   - `NEXT_PUBLIC_APP_URL`
-   - `NEXT_PUBLIC_SUPABASE_URL`
-   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-   - `SUPABASE_SERVICE_ROLE_KEY`
-   - `STRIPE_SECRET_KEY`
-   - `STRIPE_WEBHOOK_SECRET`
-   - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`
-   - `NEXT_PUBLIC_STRIPE_PRICE_ID_79`
-   - `RESEND_API_KEY`
-   - `EMAIL_FROM`
-   - `CRON_SECRET`
-3. Déployez ! Le fichier `vercel.json` configure automatiquement le cron mensuel du rapport ROI.
+- **URL de Production en direct** : [https://reveq.slim-sendjani.workers.dev](https://reveq.slim-sendjani.workers.dev)
+- **Projet Cloudflare Pages / Workers** : `reveq`
+
+### Commandes de Déploiement Cloudflare
+```bash
+# Compiler le bundle OpenNext pour Cloudflare Workers
+pnpm run build:cf
+
+# Déployer directement sur Cloudflare Workers
+pnpm run deploy:cf
+
+# Prévisualiser en local avec le runtime Cloudflare (Wrangler dev server)
+pnpm run preview:cf
+```
+
+### Variables d'environnement requises (Cloudflare Settings / Secrets)
+Configurez les variables suivantes dans le tableau de bord Cloudflare ou via `wrangler secret put <NOM>` :
+- `NEXT_PUBLIC_APP_URL` (ex: `https://reveq.slim-sendjani.workers.dev`)
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `STRIPE_SECRET_KEY`
+- `STRIPE_WEBHOOK_SECRET`
+- `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`
+- `NEXT_PUBLIC_STRIPE_PRICE_ID_79`
+- `RESEND_API_KEY`
+- `EMAIL_FROM`
+- `CRON_SECRET`
 
 ---
 

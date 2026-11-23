@@ -38,3 +38,7 @@ Thumbs.db
 coverage/
 *.lcov
 .nyc_output
+
+# Cloudflare / OpenNext
+/.open-next/
+/.wrangler/
