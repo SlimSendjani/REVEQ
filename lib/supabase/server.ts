@@ -8,7 +8,12 @@ import { env } from "@/lib/env";
  * Client Supabase pour les composants Server et Route Handlers
  */
 export function createClient() {
-  const cookieStore = cookies();
+  let cookieStore: ReturnType<typeof cookies> | null = null;
+  try {
+    cookieStore = cookies();
+  } catch {
+    cookieStore = null;
+  }
 
   return createServerClient<Database>(
     env.supabase.url,
@@ -16,18 +21,18 @@ export function createClient() {
     {
       cookies: {
         get(name: string) {
-          return cookieStore.get(name)?.value;
+          return cookieStore?.get(name)?.value;
         },
         set(name: string, value: string, options: CookieOptions) {
           try {
-            cookieStore.set({ name, value, ...options });
+            cookieStore?.set({ name, value, ...options });
           } catch {
             // Ignoré si appelé depuis un Server Component pur (en lecture seule)
           }
         },
         remove(name: string, options: CookieOptions) {
           try {
-            cookieStore.set({ name, value: "", ...options });
+            cookieStore?.set({ name, value: "", ...options });
           } catch {
             // Ignoré si appelé depuis un Server Component pur
           }

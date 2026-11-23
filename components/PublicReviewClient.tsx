@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import type { Business } from "@/types/domain";
 import { getDictionary, type SupportedLocale } from "@/lib/i18n";
 import { Star, CheckCircle2, ShieldAlert, ArrowRight, ExternalLink, Loader2 } from "lucide-react";
@@ -278,6 +279,16 @@ export function PublicReviewClient({ business }: PublicReviewClientProps) {
                 </>
               )}
             </Button>
+
+            <div className="flex items-center justify-center gap-3 pt-2 text-[10px] text-slate-400">
+              <Link href="/privacy" target="_blank" className="hover:text-slate-600 underline">
+                {locale === "en" ? "Privacy Policy (Law 25)" : "Politique de confidentialité (Loi 25)"}
+              </Link>
+              <span>•</span>
+              <Link href="/terms" target="_blank" className="hover:text-slate-600 underline">
+                {locale === "en" ? "Terms of Service" : "Conditions d'utilisation"}
+              </Link>
+            </div>
           </form>
         )}
 

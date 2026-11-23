@@ -42,3 +42,7 @@ coverage/
 # Cloudflare / OpenNext
 /.open-next/
 /.wrangler/
+
+# TypeScript Build Cache
+*.tsbuildinfo
+tsconfig.tsbuildinfo

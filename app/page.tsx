@@ -295,11 +295,21 @@ export default function HomePage() {
             <span>· Conçu à Montréal, Québec · © 2026 REVEQ</span>
           </div>
 
-          <div className="flex items-center gap-4 text-[11px] text-slate-400">
-            <span>Conforme Loi 96 &amp; Loi 25 (Québec)</span>
+          <div className="flex flex-wrap items-center justify-center gap-4 text-[11px] text-slate-400">
+            <Link href="/terms" className="hover:text-white transition-colors">
+              Conditions (79 $/mois)
+            </Link>
+            <span>·</span>
+            <Link href="/privacy" className="hover:text-white transition-colors">
+              Confidentialité (Loi 25)
+            </Link>
+            <span>·</span>
+            <Link href="/login" className="text-brand hover:underline">
+              Connexion
+            </Link>
             <span>·</span>
             <Link href="/onboarding" className="text-brand hover:underline">
-              Forfait Unique 79 $ / mois
+              Essai Gratuit 7 jours
             </Link>
           </div>
         </div>
