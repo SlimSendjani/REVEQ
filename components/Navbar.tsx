@@ -2,68 +2,59 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, ShieldCheck, Globe } from "lucide-react";
-import { Button } from "./ui/button";
+import { ChevronDown, Globe } from "lucide-react";
 
 export function Navbar() {
   const [lang, setLang] = useState<"FR" | "EN">("FR");
 
   return (
-    <header className="border-b border-white/10 bg-dark-950/90 backdrop-blur-xl sticky top-0 z-50 transition-all">
-      <div className="max-w-6xl mx-auto px-4 h-18 flex items-center justify-between">
+    <header className="border-b border-slate-100 bg-white/95 backdrop-blur-md sticky top-0 z-50 transition-all font-sans">
+      <div className="max-w-6xl mx-auto px-4 h-16 sm:h-18 flex items-center justify-between">
         
-        {/* Brand REVEQ */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-brand via-brand-dark to-dark-900 p-0.5 shadow-glow-sm group-hover:scale-105 transition-transform">
-            <div className="w-full h-full bg-dark-950 rounded-[10px] flex items-center justify-center">
-              <span className="font-black text-brand text-base tracking-tighter">R</span>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <span className="font-black text-xl tracking-tight text-white">
-              REV<span className="text-brand">EQ</span>
+        {/* Left: Brand Logo + FR/EN + Fait au Québec */}
+        <div className="flex items-center gap-3 sm:gap-4">
+          <Link href="/" className="flex items-center gap-2 group">
+            <span className="font-extrabold text-2xl tracking-tighter text-black">
+              REV<span className="text-[#0e7470]">EQ</span>
             </span>
-            <span className="text-[10px] uppercase font-mono font-extrabold tracking-widest px-2 py-0.5 rounded-full bg-brand/10 text-brand border border-brand/20">
-              79 $ / MOIS
-            </span>
-          </div>
-        </Link>
+          </Link>
 
-        {/* Navigation links */}
-        <nav className="hidden md:flex items-center gap-8 text-xs uppercase tracking-wider font-bold text-slate-400">
-          <a href="#simulateur" className="hover:text-white transition-colors">
-            Simulateur & IA
-          </a>
-          <a href="#probleme" className="hover:text-white transition-colors">
-            Le vrai coût d&apos;un avis
-          </a>
-          <a href="#comment-ca-marche" className="hover:text-white transition-colors">
-            Fonctionnement
-          </a>
-          <a href="#tarifs" className="hover:text-white transition-colors">
-            Forfait 79 $
-          </a>
-        </nav>
-
-        {/* Actions */}
-        <div className="flex items-center gap-3">
           {/* Language Toggle */}
           <button
             type="button"
             onClick={() => setLang(lang === "FR" ? "EN" : "FR")}
-            className="flex items-center gap-1.5 text-xs font-mono font-bold px-2.5 py-1.5 rounded-lg border border-slate-800 text-slate-400 hover:text-white hover:bg-dark-800 transition"
-            title="Loi 96 Québec"
+            className="text-xs font-bold text-slate-600 hover:text-black transition-colors px-1.5 py-1 rounded"
+            title="Changer de langue / Change language"
           >
-            <Globe className="w-3.5 h-3.5 text-brand" />
-            <span>{lang}</span>
+            {lang === "FR" ? "FR/EN" : "EN/FR"}
           </button>
 
+          {/* Fait au Québec Badge */}
+          <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 border border-slate-200/80 text-xs font-medium text-slate-700 shadow-2xs">
+            <span>Fait au Québec</span>
+            <span className="text-amber-500 text-xs">✨</span>
+          </div>
+        </div>
+
+        {/* Right: Navigation Links + Connexion + CTA */}
+        <div className="flex items-center gap-4 sm:gap-6">
+          <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
+            <a href="#fonctionnalites" className="flex items-center gap-1 hover:text-black transition-colors">
+              <span>Fonctionnalités</span>
+              <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+            </a>
+            <a href="#tarifs" className="hover:text-black transition-colors">
+              Tarifs
+            </a>
+            <Link href="/login" className="hover:text-black transition-colors">
+              Connexion
+            </Link>
+          </nav>
+
           <Link href="/onboarding">
-            <Button size="sm" className="font-black text-xs">
-              <span>Essai gratuit 7 jours</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Button>
+            <button className="bg-[#0e7470] hover:bg-[#0c625f] text-white text-xs sm:text-sm font-semibold px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl transition-all shadow-sm hover:shadow hover:-translate-y-0.5">
+              Essai gratuit
+            </button>
           </Link>
         </div>
 
